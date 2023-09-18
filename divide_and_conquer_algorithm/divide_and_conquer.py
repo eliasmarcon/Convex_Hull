@@ -167,29 +167,31 @@ def divide(a):
 	# merging the convex hulls
 	return merger(left_hull, right_hull)
 
-# Driver Code
-if __name__ == '__main__':
+
+
+# # Driver Code
+# if __name__ == '__main__':
 	
-	a = []
-	a.append([0, 0])
-	a.append([1, -4])
-	a.append([-1, -5])
-	a.append([-5, -3])
-	a.append([-3, -1])
-	a.append([-1, -3])
-	a.append([-2, -2])
-	a.append([-1, -1])
-	a.append([-2, -1])
-	a.append([-1, 1])
+# 	a = []
+# 	a.append([0, 0])
+# 	a.append([1, -4])
+# 	a.append([-1, -5])
+# 	a.append([-5, -3])
+# 	a.append([-3, -1])
+# 	a.append([-1, -3])
+# 	a.append([-2, -2])
+# 	a.append([-1, -1])
+# 	a.append([-2, -1])
+# 	a.append([-1, 1])
 
-	n = len(a)
-	# sorting the set of points according
-	# to the x-coordinate
-	a.sort()
-	ans = divide(a)
+# 	n = len(a)
+# 	# sorting the set of points according
+# 	# to the x-coordinate
+# 	a.sort()
+# 	ans = divide(a)
 
-	print('Convex Hull:')
-	for x in ans:
-		print(int(x[0]), int(x[1]))
+# 	print('Convex Hull:')
+# 	for x in ans:
+# 		print(int(x[0]), int(x[1]))
 
-	print(ans)
+# 	print(ans)
