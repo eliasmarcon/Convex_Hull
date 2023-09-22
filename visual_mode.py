@@ -1,6 +1,6 @@
 # imports for the algorithms
 from divide_and_conquer_algorithm.divide_and_conquer import *
-
+from quickhull.quickhull import *
 
 import tkinter as tk
 import random
@@ -12,9 +12,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 ## Create a list to store the convex hull points
-convex_hull_points = []
-
-points = [] # Initialize an empty list to store points
+CONVEX_HULL_POINTS = []
+POINTS = [] # Initialize an empty list to store points
 
 
 def add_point():
@@ -24,7 +23,7 @@ def add_point():
     try:
         
         x, y = map(float, point_str.split(","))
-        points.append((x, y))
+        POINTS.append((x, y))
         update_plot()
         point_entry.delete(0, tk.END)  # Clear the input field after adding a point
     
@@ -34,6 +33,7 @@ def add_point():
 def add_random_points():
 
     num_points_str = num_points_entry.get()
+    
     try:
         num_points = int(num_points_str)
         if num_points < 1:
@@ -41,8 +41,9 @@ def add_random_points():
         for _ in range(num_points):
             x = random.uniform(-500.0, 500.0)  # Adjust the range as needed
             y = random.uniform(-500.0, 500.0)  # Adjust the range as needed
-            points.append((x, y))
+            POINTS.append((x, y))
         update_plot()
+    
     except ValueError:
         pass
 
@@ -56,9 +57,10 @@ def add_random_points_on_enter(event):
 
 
 def clear_points():
+
+    global POINTS
     
-    global points
-    points = []
+    POINTS = []
     update_plot()
 
 
@@ -66,22 +68,23 @@ def update_plot():
 
     ax.clear()
 
-    if points:
-        x, y = zip(*points)
+    if POINTS:
+        
+        x, y = zip(*POINTS)
         ax.scatter(x, y, c='b', marker='o', label='Points')
 
 
-    if len(convex_hull_points) > 0:
+    if len(CONVEX_HULL_POINTS) > 0:
         
-        convex_hull_points.append(convex_hull_points[0])  # Close the convex hull polygon
+        CONVEX_HULL_POINTS.append(CONVEX_HULL_POINTS[0])  # Close the convex hull polygon
         
-        convex_hull_x, convex_hull_y = zip(*convex_hull_points)
+        convex_hull_x, convex_hull_y = zip(*CONVEX_HULL_POINTS)
         
         ax.plot(convex_hull_x, convex_hull_y, marker = 's', c = 'r', label='Convex Hull')
         
         # print("Convex Hull Points:")
         
-        # for point in convex_hull_points:
+        # for point in CONVEX_HULL_POINTS:
         #     print(point)
 
     # Place the legend outside and under the plot
@@ -101,10 +104,9 @@ def do_nothing():
 ## OPTIONL ? MERGESORT SELBER IMPLEMENTIEREN ODER EINFACH SORT() BENUTZEN?
 def divide_and_conquer_convex_hull():
 
-    points.sort()
-
-    global convex_hull_points
-    convex_hull_points = divide(points)
+    POINTS.sort()
+    global CONVEX_HULL_POINTS
+    CONVEX_HULL_POINTS = divide(POINTS)
 
     update_plot()
 
@@ -123,7 +125,16 @@ def divide_and_conquer_convex_hull():
 
 
 ##########################################################################################################################
-# Second Algorithm
+# Quickhull
+def quickhull_main():
+
+    fig, ax, CONVEX_HULL_POINTS = quickhull(POINTS)
+
+    fig, ax, CONVEX_HULL_POINTS = final_plot(fig, ax, CONVEX_HULL_POINTS)
+
+    return fig, ax, CONVEX_HULL_POINTS 
+
+
 
 
 
@@ -172,12 +183,13 @@ ttk.Button(root, text="Add Random Points", command=add_random_points).grid(row=2
 ttk.Button(root, text="Clear Points", command=clear_points).grid(row=3, column=1, padx=5, pady=5)  # Button to clear points
 
 ttk.Button(root, text="Divide and Conquer Algorithm", command=divide_and_conquer_convex_hull).grid(row=0, column=2, padx=5, pady=5)
-ttk.Button(root, text="Algorithm 2", command=do_nothing).grid(row=1, column=2, padx=5, pady=5)
+ttk.Button(root, text="Quickhull", command=quickhull_main).grid(row=1, column=2, padx=5, pady=5)
 ttk.Button(root, text="Compute Convex Hull", command=do_nothing).grid(row=2, column=2, padx=5, pady=5)
 
 
+
 # Create a Matplotlib plot in the Tkinter window
-fig, ax = plt.subplots(figsize=(20, 12))
+fig, ax = plt.subplots(figsize=(15, 12))
 canvas = FigureCanvasTkAgg(fig, master=root)
 canvas.get_tk_widget().grid(row=4, column=0, columnspan=3, padx=5, pady=5)
 
