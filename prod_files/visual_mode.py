@@ -71,9 +71,6 @@ def update_plot():
         x, y = zip(*POINTS)
         ax.scatter(x, y, c='b', marker='o', label='Points')
 
-    # Place the legend outside and under the plot
-    ax.legend(loc='upper center', bbox_to_anchor = (1.05, 1.05))
-
     canvas.draw()
 
 # Function that does nothing when the button is clicked
