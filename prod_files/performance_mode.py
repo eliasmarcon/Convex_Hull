@@ -4,6 +4,7 @@ import time
 import pandas as pd
 
 from quickhull_folder.quickhull_performance import *
+from additional_files.modules import *
 
 from tkinter.scrolledtext import ScrolledText  # Import ScrolledText for multi-line text display
 from tkinter.font import Font
@@ -253,7 +254,7 @@ quickhull_dataframe_label = ttk.Label(root, text="Quickhull Dataframe of Test Ca
 quickhull_dataframe_label.grid(row=9, column=0, columnspan=8, padx=5, pady=5)
 
 # Read the DataFrame from a CSV file
-df = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\quickhull\quickhull_performance\Testfile_Quickhull.csv', sep = ",")
+df = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\quickhull_folder\quickhull_performance_testing\Testfile_Quickhull.csv', sep = ",")
 df = df.sort_values(by='Number_of_Points', ascending=False)
 
 # Create a Treeview widget to display the DataFrame
@@ -283,7 +284,7 @@ divide_and_conquer_dataframe_label = ttk.Label(root, text="Divide and Conquer Da
 divide_and_conquer_dataframe_label.grid(row=11, column=0, columnspan=8, padx=5, pady=5)
 
 # Read the DataFrame from a CSV file
-df_divide_and_conquer = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\quickhull\quickhull_performance\Testfile_Quickhull.csv', sep = ",")
+df_divide_and_conquer = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\quickhull_folder\quickhull_performance_testing\Testfile_Quickhull.csv', sep = ",")
 df_divide_and_conquer = df_divide_and_conquer.sort_values(by='Number_of_Points', ascending=False)
 
 # Create a Treeview widget to display the DataFrame

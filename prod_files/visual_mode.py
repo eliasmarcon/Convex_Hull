@@ -1,10 +1,10 @@
-from quickhull_folder.quickhull import *
-
 import tkinter as tk
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import random
 
+from quickhull_folder.quickhull import *
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from tkinter import ttk, filedialog
 
 ## Create a list to store the convex hull points
 CONVEX_HULL_POINTS = []
@@ -35,8 +35,8 @@ def add_random_points():
         if num_points < 1:
             return
         for _ in range(num_points):
-            x = random.uniform(0.0, 500.0)  # Adjust the range as needed
-            y = random.uniform(0.0, 500.0)  # Adjust the range as needed
+            x = random.uniform(-500.0, 500.0)  # Adjust the range as needed
+            y = random.uniform(-500.0, 500.0)  # Adjust the range as needed
             POINTS.append((x, y))
         update_plot()
         display_point_count()
@@ -107,6 +107,37 @@ def center_window(root):
 
     root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
 
+
+# Function to handle file selection and reading
+def open_file():
+
+    file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
+    
+    if file_path:
+
+        with open(file_path, 'r') as file:
+            
+            lines = file.readlines()
+            
+            if len(lines) >= 2:
+
+                try:
+                    # Read the number of points from the first line
+                    num_points = int(lines[0])
+                    
+                    # Parse the following lines with x,y coordinates
+                    for line in lines[1:]:
+                        x, y = map(float, line.strip().split(','))
+                        POINTS.append((x, y))
+                    
+                except ValueError:
+                    num_points_label.config(text="Invalid file format")
+            else:
+                num_points_label.config(text="Invalid file format")
+
+            display_point_count()
+            update_plot()
+
 #####################################################################################################################
 #####################################################################################################################
 
@@ -149,6 +180,8 @@ num_points_entry.bind("<Return>", add_random_points_on_enter)  # Bind the Enter 
 tk.Button(root, text="Add Random Points", command=add_random_points).grid(row=2, column=1, padx=5, pady=5)
 tk.Button(root, text="Clear Points", command=clear_points).grid(row=3, column=1, padx=5, pady=5)  # Button to clear points
 
+# Create a button to trigger file upload
+ttk.Button(root, text="Upload File", command=open_file).grid(row=0, column=2, rowspan=2, padx=5, pady=5)
 tk.Button(root, text="Quickhull", command=lambda:quickhull_run(fig, ax, canvas, root, POINTS)).grid(row=1, column=2, rowspan=2, padx=5, pady=5)
 tk.Button(root, text="Divide and Conquer", command=do_nothing).grid(row=2, column=2, rowspan=2, padx=5, pady=5)
 
