@@ -6,4 +6,5 @@
 - [] Variable Names
 - [] Read ME
 - [] Testprotokoll
-- [] Design 
+- [] Testfälle erstellen
+- [x] Design 

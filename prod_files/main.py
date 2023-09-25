@@ -4,8 +4,8 @@ import subprocess  # Used to run external scripts
 
 def center_window(root):
     
-    window_width = int(root.winfo_screenwidth() * 0.3) #450
-    window_height = int(root.winfo_screenwidth() * 0.1) #175
+    window_width = 450 #int(root.winfo_screenwidth() * 0.3) #450
+    window_height = 175 #int(root.winfo_screenwidth() * 0.1) #175
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()

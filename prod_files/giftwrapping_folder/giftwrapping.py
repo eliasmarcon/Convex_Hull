@@ -98,7 +98,7 @@ def gift_wrapping_calculation(ax, canvas, root, points):
     ax, canvas = last_connection(ax, canvas, convex_hull_points)
     root.update()  # Update the GUI
 
-    time_sleep(2)
+    time_sleep(1)
 
     final_hull(ax, canvas, convex_hull_points)
     root.update()  # Update the GUI

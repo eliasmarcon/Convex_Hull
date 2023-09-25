@@ -1,6 +1,5 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
-import random
 
 from quickhull_folder.quickhull import *
 from giftwrapping_folder.giftwrapping import *
@@ -12,8 +11,7 @@ from tkinter import ttk, filedialog
 ## Create a list to store the convex hull points
 CONVEX_HULL_POINTS = []
 POINTS = [] # Initialize an empty list to store points
-RANGE_X = -500.0
-RANGE_Y = 500.0
+
 
 def add_point():
 
@@ -35,29 +33,6 @@ def add_random_points():
     num_points_str = num_points_entry.get()
     num_points = int(num_points_str)
     
-    # try:
-    #     if num_points < 1:
-    #         return
-    #     for _ in range(num_points):
-    #         x = random.uniform(RANGE_X, RANGE_Y)  # Adjust the range as needed
-    #         y = random.uniform(RANGE_X, RANGE_Y)  # Adjust the range as needed
-    #         POINTS.append((x, y))
-    #     update_plot()
-    #     display_point_count()
-    
-    # except ValueError:
-    #     pass
-
-    # unique_points = set()  # A set to store unique points
-
-    # while len(unique_points) < num_points:
-    #     x = random.uniform(RANGE_X, RANGE_Y)
-    #     y = random.uniform(RANGE_X, RANGE_Y)
-    #     point = (x, y)
-
-    #     if point not in unique_points:
-    #         unique_points.add(point)
-    #         POINTS.append(point)
     global POINTS
     POINTS = modules.generate_points(num_points, POINTS)
 
@@ -91,7 +66,7 @@ def update_plot():
     if POINTS:
         
         x, y = zip(*POINTS)
-        ax.scatter(x, y, c='b', marker='o', label='Points', s = 2)
+        ax.scatter(x, y, c='b', marker='o', label='Points', s = 4)
 
     canvas.draw()
 
@@ -108,20 +83,20 @@ def quickhull_run(fig, ax, canvas, root, POINTS):
 
     convex_hull = quickhull(fig, ax, canvas, root, POINTS)
 
-    print(convex_hull)
+    # print(convex_hull)
 
 # GIFTWRAPPING ALGORITHM
 def giftwrapping_run(ax, canvas, root, POINTS):
 
     convex_hull = gift_wrapping(ax, canvas, root, POINTS)
 
-    print(convex_hull)
+    # print(convex_hull)
     
 
 def center_window(root):
     
-    window_width = int(root.winfo_screenwidth() * 0.3) 
-    window_height = int(root.winfo_screenwidth() * 0.3)
+    window_width = 1000 #int(root.winfo_screenwidth() * 0.3) 
+    window_height = 1000 #int(root.winfo_screenwidth() * 0.3)
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -167,7 +142,6 @@ def open_file():
 #####################################################################################################################
 #####################################################################################################################
 
-
 # User Interface
 
 # Create the main Tkinter window
@@ -176,47 +150,100 @@ root.title("Convex Hull Visualization")
 
 center_window(root)  # Center the main window
 
+upper_frame = tk.Frame(root)
+upper_frame.pack(fill = "both", expand = True) 
 
-# Create a Matplotlib plot in the Tkinter window
-fig, ax = plt.subplots()
-canvas = FigureCanvasTkAgg(fig, master=root)
-canvas.get_tk_widget().grid(row=5, column=0, columnspan=4, padx=5, pady=5)
+
+#########################################################################################
 
 # Create GUI elements
-point_label = tk.Label(root, text="Enter Points (x.0, y.0):")
-point_label.grid(row=0, column=0, padx=5, pady=5)
+point_label = ttk.Label(upper_frame, text="Enter Points (x.0, y.0):")
+point_label.grid(row=0, column=0, padx=(10, 60), pady = 5)
 
-point_entry = tk.Entry(root)
-point_entry.grid(row=1, column=0, padx=5, pady=5)
+point_entry = ttk.Entry(upper_frame)
+point_entry.grid(row=1, column=0, padx=(10, 60), pady = 5)
 point_entry.bind("<Return>", add_point_on_enter)  # Bind the Enter key to add_point
 
+ttk.Button(upper_frame, text="Add Point", command=add_point).grid(row=2, column=0, padx=(10, 60), pady = 5)
+ttk.Button(upper_frame, text="Clear Points", command=clear_points).grid(row=3, column=0, padx=(10, 60), pady = 5)  # Button to clear points
 
-tk.Button(root, text="Add Point", command=add_point).grid(row=2, column=0, padx=5, pady=5)
-tk.Button(root, text="Clear Points", command=clear_points).grid(row=3, column=0, padx=5, pady=5)  # Button to clear points
+#########################################################################################
 
 # Input field for specifying the number of random points
-num_points_label = tk.Label(root, text="Enter the number of random points:")
-num_points_label.grid(row=0, column=1, padx=5, pady=5)
+num_points_label = ttk.Label(upper_frame, text="Enter the number of random points:")
+num_points_label.grid(row=0, column=1, padx=(60, 60), pady=5)
 
-num_points_entry = tk.Entry(root)
-num_points_entry.grid(row=1, column=1, padx=5, pady=5)
+num_points_entry = ttk.Entry(upper_frame)
+num_points_entry.grid(row=1, column=1, padx=(60, 60), pady=5)
 num_points_entry.bind("<Return>", add_random_points_on_enter)  # Bind the Enter key to add_point
 
-
-tk.Button(root, text="Add Random Points", command=add_random_points).grid(row=2, column=1, padx=5, pady=5)
-tk.Button(root, text="Clear Points", command=clear_points).grid(row=3, column=1, padx=5, pady=5)  # Button to clear points
-
-# Create a button to trigger file upload
-ttk.Button(root, text="Upload File", command=open_file).grid(row=0, column=2, rowspan=2, padx=5, pady=5)
-ttk.Button(root, text="Clear Algorithm Run", command=update_plot).grid(row=1, column=2, rowspan=2, padx=5, pady=5)
-tk.Button(root, text="Quickhull", command=lambda:quickhull_run(fig, ax, canvas, root, POINTS)).grid(row=2, column=2, rowspan=2, padx=5, pady=5)
-tk.Button(root, text="Giftwrapping", command=lambda:giftwrapping_run(ax, canvas, root, POINTS)).grid(row=3, column=2, rowspan=2, padx=5, pady=5)
-
-tk.Button(root, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=6, column=2, rowspan=2, padx=5, pady=5)
-
+ttk.Button(upper_frame, text="Add Random Points", command=add_random_points).grid(row=2, column=1, padx=(60, 60), pady=5)
+ttk.Button(upper_frame, text="Clear Points", command=clear_points).grid(row=3, column=1, padx=(60, 60), pady=5)  # Button to clear points
 
 # Create a label to display the point count
-point_count_label = tk.Label(root, text="Number of Points: 0")
-point_count_label.grid(row=4, column=0, columnspan=4, padx=10, pady=10)
+point_count_label = ttk.Label(upper_frame, text="Number of Points: 0")
+point_count_label.grid(row=4, column=0, padx=(60, 60), pady = 5, columnspan=2)
+
+###########################################################################################
+
+# Create a button to trigger file upload
+ttk.Button(upper_frame, text="Quickhull Algorithm", command=lambda:quickhull_run(fig, ax, canvas, upper_frame, POINTS)).grid(row=1, column=2, padx=(60, 60), pady=5)
+ttk.Button(upper_frame, text="Giftwrapping Algorithm", command=lambda:giftwrapping_run(ax, canvas, upper_frame, POINTS)).grid(row=2, column=2, padx=(60, 60), pady=5)
+ttk.Button(upper_frame, text="Clear Algorithm Run", command=update_plot).grid(row=3, column=2, padx=(60, 60), pady=5)
+
+##########################################################################################
+
+ttk.Button(upper_frame, text="Upload File", command=open_file).grid(row=1, column=3, padx=(60, 10), pady=5)
+ttk.Button(upper_frame, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=2, column=3, padx=(60, 10), pady=5)
+
+##########################################################################################
+
+lower_frame = tk.Frame(root)
+lower_frame.pack(fill = "both", expand = True) 
+
+# Create a Matplotlib plot in the Tkinter window
+fig, ax = plt.subplots(figsize=(8, 8))
+
+# Plot Figure
+canvas = FigureCanvasTkAgg(fig, master=lower_frame)
+canvas.draw()
+canvas.get_tk_widget().pack(side="left", fill="both", expand = True)
+
 
 root.mainloop()
+
+
+
+# # Create GUI elements
+# single_point_label = tk.Label(upper_frame, text="Enter Points (x.0, y.0):")
+# single_point_label.pack(fill=tk.BOTH, padx=10, pady=5, side=tk.LEFT)
+
+# # Use pack to arrange widgets in separate rows
+# num_points_label = tk.Label(upper_frame, text="Enter the number of random points:")
+# num_points_label.pack(fill=tk.BOTH, padx=10, pady=5, side=tk.RIGHT)
+
+
+
+# point_entry = tk.Entry(upper_frame)
+# point_entry.bind("<Return>", add_point_on_enter)  # Bind the Enter key to add_point
+# point_entry.pack(fill=tk.BOTH, padx=10, pady=5)
+
+# num_points_entry = tk.Entry(upper_frame)
+# num_points_entry.bind("<Return>", add_random_points_on_enter)  # Bind the Enter key to add_point
+# num_points_entry.pack(fill=tk.BOTH, padx=10, pady=5, side=tk.RIGHT)
+
+
+# # Input field for specifying the number of random points
+# add_single_point_button = tk.Button(upper_frame, text="Add Point", command=add_point)
+# add_single_point_button.pack(fill=tk.BOTH, padx=10, pady=5, side=tk.LEFT)
+
+# add_random_point_button = tk.Button(upper_frame, text="Add Random Points", command=add_random_points)
+# add_random_point_button.pack(fill=tk.BOTH, padx=10, pady=5, side=tk.LEFT)
+
+
+# clear_points_button = tk.Button(upper_frame, text="Clear Points", command=clear_points)  # Button to clear points
+# clear_points_button.pack(fill=tk.BOTH, padx=10, pady=5, side=tk.LEFT)
+
+
+
+

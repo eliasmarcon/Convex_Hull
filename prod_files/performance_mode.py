@@ -35,8 +35,9 @@ def add_random_points():
     # except ValueError:
     #     pass
 
-    global POINTS
-    POINTS = modules.generate_points(num_points, POINTS)
+    global points
+    points = modules.generate_points(num_points, points)
+    display_point_count()
 
 def add_random_points_on_enter(event):
 
@@ -68,8 +69,6 @@ def run_both_commands():
 def update_faster_algorithm_label():
     
     global giftwrapping_time, quickhull_time
-    
-    print(giftwrapping_time, quickhull_time)
 
     if giftwrapping_time < quickhull_time:
 
@@ -91,8 +90,8 @@ def do_nothing():
 
 def center_window(root):
     
-    window_width = int(root.winfo_screenwidth() * 0.5) 
-    window_height = int(root.winfo_screenwidth() * 0.5)
+    window_width = 1000 # int(root.winfo_screenwidth() * 0.5) 
+    window_height = 1000 # int(root.winfo_screenwidth() * 0.5)
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -190,41 +189,43 @@ root.title("Performance Optimized Mode")
 
 center_window(root)  # Center the main window
 
+upper_frame = tk.Frame(root)
+upper_frame.pack(fill = "both", expand = True) 
+
 # Create GUI elements
 
-# Create a label to display the point count
-point_count_label = ttk.Label(root, text="Number of Points: 0")
-point_count_label.grid(row=0, column=0, columnspan=8, padx=10, pady=10)
 
 # Input field for specifying the number of random points
-num_points_label = ttk.Label(root, text="Enter the number of random points:")
-num_points_label.grid(row=1, column=0, padx=5, pady=5, columnspan=4)
+num_points_label = ttk.Label(upper_frame, text="Enter the number of random points:")
+num_points_label.grid(row=0, column=0, padx=(40, 100), pady=10)
 
-num_points_entry = ttk.Entry(root)
-num_points_entry.grid(row=1, column=4, padx=5, pady=5, columnspan=4)
+num_points_entry = ttk.Entry(upper_frame)
+num_points_entry.grid(row=1, column=0, padx=(40, 100), pady=10)
 num_points_entry.bind("<Return>", add_random_points_on_enter)  # Bind the Enter key to add_random_points
 
+add_random_button = ttk.Button(upper_frame, text="Add Random Points", command=add_random_points)
+add_random_button.grid(row=2, column=0, padx=(40, 100), pady=10)
 
-ttk.Button(root, text="Clear Points", command=clear_points).grid(row=2, column=0, columnspan=3, padx=5, pady=(5, 20))  # Button to clear points
+###################################################################################################################################
 
+ttk.Button(upper_frame, text="Clear Points", command=clear_points).grid(row=0, column=1, padx=(100, 100), pady=10)  # Button to clear points
 # Create a button to trigger file upload
-upload_button = ttk.Button(root, text="Upload File", command=open_file)
-upload_button.grid(row=2, column=3, columnspan=2, padx=5, pady=5)
-
-add_random_button = ttk.Button(root, text="Add Random Points", command=add_random_points)
-add_random_button.grid(row=2, column=6, padx=5, pady=(5, 20), columnspan=3)
-
-
-
-
-ttk.Button(root, text="Quickhull Algorithm", command=quickhull_run).grid(row=3, column=0, padx=5, pady=5)
-ttk.Button(root, text="Giftwrapping Algorithm", command=giftwrapping_run).grid(row=3, column=3, padx=5, pady=5)
-ttk.Button(root, text="Compare both Algorithms", command=run_both_commands).grid(row=3, column=6, padx=5, pady=5)
-tk.Button(root, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=16, column=2, rowspan=2, padx=5, pady=5)
-
+upload_button = ttk.Button(upper_frame, text="Upload File", command=open_file)
+upload_button.grid(row=1, column=1, padx=(100, 100), pady=10)
+ttk.Button(upper_frame, text="Compare both Algorithms", command=run_both_commands).grid(row=2, column=1, padx=(100, 100), pady=10)
 
 ###################################################################################################################################
-###################################################################################################################################
+
+ttk.Button(upper_frame, text="Quickhull Algorithm", command=quickhull_run).grid(row=0, column=2, padx=(100, 10), pady=10)
+ttk.Button(upper_frame, text="Giftwrapping Algorithm", command=giftwrapping_run).grid(row=1, column=2, padx=(100, 10), pady=10)
+tk.Button(upper_frame, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=2, column=2, padx=(100, 10), pady=10)
+
+
+# Create a label to display the point count
+point_count_label = ttk.Label(upper_frame, text="Number of Points: 0")
+point_count_label.grid(row=3, column=1, padx=(100, 100), pady=(10, 40))
+
+
 ###################################################################################################################################
 
 # Create a custom bold font
@@ -232,92 +233,114 @@ bold_font = Font(family="Helvetica", size=10, weight="bold")
 font_standard = Font(family="Helvetica", size=10)
 
 # Create a label to display the elapsed time
-dac_elapsed_time_label = ttk.Label(root, text="Elapsed Time Giftwrapping: 0.0000 seconds", font = font_standard)
-dac_elapsed_time_label.grid(row=5, column=0, columnspan=8, padx=10, pady=10)
+dac_elapsed_time_label = ttk.Label(upper_frame, text="Elapsed Time Giftwrapping: 0.0000 seconds", font = font_standard)
+dac_elapsed_time_label.grid(row=4, column=1, padx=10, pady=10)
 
 # Create a label to display the elapsed time
-elapsed_time_label = ttk.Label(root, text="Elapsed Time Quickhull: 0.0000 seconds", font=font_standard)
-elapsed_time_label.grid(row=6, column=0, columnspan=8, padx=10, pady=10)
+elapsed_time_label = ttk.Label(upper_frame, text="Elapsed Time Quickhull: 0.0000 seconds", font=font_standard)
+elapsed_time_label.grid(row=5, column=1, padx=10, pady=10)
 
 # Create a label to display the faster algorithm
-faster_algorithm_label = ttk.Label(root, text="Faster Algorithm in this Test Case: N/A", font=bold_font)
-faster_algorithm_label.grid(row=7, column=0, columnspan=8, padx=10, pady=(10, 40))
+faster_algorithm_label = ttk.Label(upper_frame, text="Faster Algorithm in this Test Case: N/A", font=bold_font)
+faster_algorithm_label.grid(row=6, column=1, padx=10, pady=(10, 40))
 
 
 ###################################################################################################################################
 ############################################## Dataframes for Test Cases ##########################################################
 ###################################################################################################################################
 
+lower_frame = tk.Frame(root)
+lower_frame.pack(fill = "both", expand = True) 
+
 # Create a label to display the faster algorithm
-dataframes_general_label = ttk.Label(root, text="Dataframes of Test Cases for Quickhull and Giftwrapping Algorithm", font=bold_font)
-dataframes_general_label.grid(row=8, column=0, padx=10, columnspan=8, pady=(10, 20))
+dataframes_general_label = ttk.Label(lower_frame, text="Dataframes of Test Cases for Quickhull and Giftwrapping Algorithm", font=bold_font)
+dataframes_general_label.grid(row=0, column=0, padx=(300, 300), pady=10)#.pack(fill="both", expand = True, anchor="e")
 
 ###################################################################################################################################
 
 # Create a label to display the faster algorithm
-quickhull_dataframe_label = ttk.Label(root, text="Quickhull Dataframe of Test Cases", font=font_standard)
-quickhull_dataframe_label.grid(row=9, column=0, columnspan=8, padx=5, pady=5)
+quickhull_dataframe_label = ttk.Label(lower_frame, text="Quickhull Dataframe of Test Cases", font=font_standard)
+quickhull_dataframe_label.grid(row=1, column=0, padx=(300, 300), pady=10)#.pack(side = tk.LEFT, fill="both", expand = True, anchor="e")
 
 # Read the DataFrame from a CSV file
-df = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Quickhull.csv', sep = ",")
-df = df.sort_values(by='Number_of_Points', ascending=False)
+df_quickhull = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Quickhull.csv', sep = ",")
+df_quickhull['Number_of_Points'] = df_quickhull['Number_of_Points'].astype(int)
+df_quickhull = df_quickhull.sort_values(by='Number_of_Points', ascending=False)
+
+lower_frame_tree1 = tk.Frame(root)
+lower_frame_tree1.pack(fill = "both", expand = True) 
+
 
 # Create a Treeview widget to display the DataFrame
-tree = ttk.Treeview(root, columns=list(df.columns), show='headings')
+tree_quickhull = ttk.Treeview(lower_frame_tree1, columns=list(df_quickhull.columns), show='headings')
 
 # Add column headings
-for col in df.columns:
-    tree.heading(col, text=col)
-    tree.column(col, width=150)  # Adjust the width as needed
+for col in df_quickhull.columns:
+    tree_quickhull.heading(col, text=col)
+    tree_quickhull.column(col, width=150)  # Adjust the width as needed
 
 # Insert DataFrame rows into the Treeview
-for i, row in df.iterrows():
-    tree.insert('', 'end', values=row.tolist())
+for i, row in df_quickhull.iterrows():
+    tree_quickhull.insert('', 'end', values=row.tolist())
 
 # Create a scrollbar
-scrollbar = ttk.Scrollbar(root, orient='vertical', command=tree.yview)
-tree.configure(yscroll=scrollbar.set)
+scrollbar = ttk.Scrollbar(lower_frame_tree1, orient='vertical', command=tree_quickhull.yview)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand = True)
+tree_quickhull.configure(yscroll=scrollbar.set)
+tree_quickhull.pack(side=tk.LEFT, fill=tk.Y, expand = True, pady=20, padx=10)
 
 # Pack the Treeview and scrollbar into the window
-tree.grid(row=10, column=0, columnspan=8, padx=10, pady=(10, 30))
-scrollbar.grid(row=10, column=8, columnspan=8, padx=10, pady=(10, 30))
+# tree.grid(row=10, column=0, columnspan=8, padx=10, pady=(10, 30))
+# scrollbar.grid(row=10, column=8, columnspan=8, padx=10, pady=(10, 30))
 
-###################################################################################################################################
+# ###################################################################################################################################
+lower_frame2 = tk.Frame(root)
+lower_frame2.pack(fill = "both", expand = True) 
 
 # Create a label to display the faster algorithm
-giftwrapping_dataframe_label = ttk.Label(root, text="Giftwrapping Dataframe of Test Cases", font=font_standard)
-giftwrapping_dataframe_label.grid(row=11, column=0, columnspan=8, padx=5, pady=5)
+giftwrapping_dataframe_label = ttk.Label(lower_frame2, text="Giftwrapping Dataframe of Test Cases", font=font_standard)
+giftwrapping_dataframe_label.grid(row=0, column=0, padx=(400, 400), pady=10)#.pack(fill="both", expand = True, anchor="center")
 
 # Read the DataFrame from a CSV file
 df_giftwrapping = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Giftwrapping.csv', sep = ",")
+df_giftwrapping['Number_of_Points'] = df_giftwrapping['Number_of_Points'].astype(int)
 df_giftwrapping = df_giftwrapping.sort_values(by='Number_of_Points', ascending=False)
 
+
+lower_frame2_tree2 = tk.Frame(root)
+lower_frame2_tree2.pack(fill = "both", expand = True) 
+
 # Create a Treeview widget to display the DataFrame
-tree = ttk.Treeview(root, columns=list(df_giftwrapping.columns), show='headings')
+tree_giftwrapping = ttk.Treeview(lower_frame2_tree2, columns=list(df_giftwrapping.columns), show='headings')
 
 # Add column headings
 for col in df_giftwrapping.columns:
-    tree.heading(col, text=col)
-    tree.column(col, width=150)  # Adjust the width as needed
+    tree_giftwrapping.heading(col, text=col)
+    tree_giftwrapping.column(col, width=150)  # Adjust the width as needed
 
 # Insert DataFrame rows into the Treeview
 for i, row in df_giftwrapping.iterrows():
-    tree.insert('', 'end', values=row.tolist())
+    tree_giftwrapping.insert('', 'end', values=row.tolist())
 
 # Create a scrollbar
-scrollbar = ttk.Scrollbar(root, orient='vertical', command=tree.yview)
-tree.configure(yscroll=scrollbar.set)
+scrollbar = ttk.Scrollbar(lower_frame2_tree2, orient='vertical', command=tree_giftwrapping.yview)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand = True)
+tree_giftwrapping.configure(yscroll=scrollbar.set)
+tree_giftwrapping.pack(side=tk.LEFT, fill=tk.Y, expand = True, pady=20, padx=10)
 
-# Pack the Treeview and scrollbar into the window
-tree.grid(row=11, column=0, columnspan=8, padx=10, pady=(10, 30))
-scrollbar.grid(row=11, column=8, columnspan=8, padx=10, pady=(10,30))
+# # Pack the Treeview and scrollbar into the window
+# tree.grid(row=11, column=0, columnspan=8, padx=10, pady=(10, 30))
+# scrollbar.grid(row=11, column=8, columnspan=8, padx=10, pady=(10,30))
 ###################################################################################################################################
+# lower_frame3 = tk.Frame(root)
+# lower_frame3.pack(fill = "both", expand = True) 
 
-# Create a label to display the faster algorithm
-generell_faster_label = ttk.Label(root, text="Overall faster Algorithm", font=font_standard)
-generell_faster_label.grid(row=15, column=0, columnspan=8, padx=5, pady=5)
 
-# Berechnungen
+# # Create a label to display the faster algorithm
+# generell_faster_label = ttk.Label(lower_frame3, text="Overall faster Algorithm", font=font_standard)
+# generell_faster_label.grid(row=0, column=0, padx=(400, 400), pady=10)
+
+# # Berechnungen
 
 
 ###################################################################################################################################
