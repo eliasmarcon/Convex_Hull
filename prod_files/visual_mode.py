@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import random
 
 from quickhull_folder.quickhull import *
+from divide_and_conquer_algorithm.giftwrapping import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import ttk, filedialog
 
@@ -88,16 +89,18 @@ def quickhull_run(fig, ax, canvas, root, POINTS):
 
     print(convex_hull)
 
-# DIVIDE AND CONQUER ALGORITHM
-def divide_and_conquer_run():
+# GIFTWRAPPING ALGORITHM
+def giftwrapping_run(ax, canvas, root, POINTS):
 
-    do_nothing()
+    convex_hull = gift_wrapping(ax, canvas, root, POINTS)
+
+    print(convex_hull)
     
 
 def center_window(root):
     
-    window_width = int(root.winfo_screenwidth() * 0.5) 
-    window_height = int(root.winfo_screenwidth() * 0.5)
+    window_width = int(root.winfo_screenwidth() * 0.3) 
+    window_height = int(root.winfo_screenwidth() * 0.3)
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -182,8 +185,9 @@ tk.Button(root, text="Clear Points", command=clear_points).grid(row=3, column=1,
 
 # Create a button to trigger file upload
 ttk.Button(root, text="Upload File", command=open_file).grid(row=0, column=2, rowspan=2, padx=5, pady=5)
-tk.Button(root, text="Quickhull", command=lambda:quickhull_run(fig, ax, canvas, root, POINTS)).grid(row=1, column=2, rowspan=2, padx=5, pady=5)
-tk.Button(root, text="Divide and Conquer", command=do_nothing).grid(row=2, column=2, rowspan=2, padx=5, pady=5)
+ttk.Button(root, text="Clear Algorithm Run", command=update_plot).grid(row=1, column=2, rowspan=2, padx=5, pady=5)
+tk.Button(root, text="Quickhull", command=lambda:quickhull_run(fig, ax, canvas, root, POINTS)).grid(row=2, column=2, rowspan=2, padx=5, pady=5)
+tk.Button(root, text="Divide and Conquer", command=lambda:giftwrapping_run(ax, canvas, root, POINTS)).grid(row=3, column=2, rowspan=2, padx=5, pady=5)
 
 
 # Create a label to display the point count
