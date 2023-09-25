@@ -4,6 +4,8 @@ import random
 
 from quickhull_folder.quickhull import *
 from giftwrapping_folder.giftwrapping import *
+from additional_files import modules
+
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import ttk, filedialog
 
@@ -46,16 +48,18 @@ def add_random_points():
     # except ValueError:
     #     pass
 
-    unique_points = set()  # A set to store unique points
+    # unique_points = set()  # A set to store unique points
 
-    while len(unique_points) < num_points:
-        x = random.uniform(RANGE_X, RANGE_Y)
-        y = random.uniform(RANGE_X, RANGE_Y)
-        point = (x, y)
+    # while len(unique_points) < num_points:
+    #     x = random.uniform(RANGE_X, RANGE_Y)
+    #     y = random.uniform(RANGE_X, RANGE_Y)
+    #     point = (x, y)
 
-        if point not in unique_points:
-            unique_points.add(point)
-            POINTS.append(point)
+    #     if point not in unique_points:
+    #         unique_points.add(point)
+    #         POINTS.append(point)
+    global POINTS
+    POINTS = modules.generate_points(num_points, POINTS)
 
     update_plot()
     display_point_count()
@@ -126,6 +130,8 @@ def center_window(root):
     y = ( screen_height / 2 ) - ( window_height / 2 )
 
     root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
+
+
 
 
 # Function to handle file selection and reading
@@ -205,6 +211,8 @@ ttk.Button(root, text="Upload File", command=open_file).grid(row=0, column=2, ro
 ttk.Button(root, text="Clear Algorithm Run", command=update_plot).grid(row=1, column=2, rowspan=2, padx=5, pady=5)
 tk.Button(root, text="Quickhull", command=lambda:quickhull_run(fig, ax, canvas, root, POINTS)).grid(row=2, column=2, rowspan=2, padx=5, pady=5)
 tk.Button(root, text="Giftwrapping", command=lambda:giftwrapping_run(ax, canvas, root, POINTS)).grid(row=3, column=2, rowspan=2, padx=5, pady=5)
+
+tk.Button(root, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=6, column=2, rowspan=2, padx=5, pady=5)
 
 
 # Create a label to display the point count

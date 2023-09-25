@@ -1,8 +1,6 @@
-import pandas as pd
-import time
-import csv
 import os
 import sys
+import random
 
 from giftwrapping_performance import *
 
@@ -10,12 +8,13 @@ from giftwrapping_performance import *
 project_root = os.path.dirname(os.path.dirname(os.path.abspath("./additional_files/")))
 sys.path.append(project_root)
 
-from additional_files.modules import *
+from additional_files import modules
 
 
 def main():
 
-    num_points_array = generate_num_points_array()
+    num_points_array = modules.get_preset_points_array()
+    algorithm_name = "Giftwrapping"
 
     if len(sys.argv) > 1:
         
@@ -26,36 +25,9 @@ def main():
         num_points = random.choice(num_points_array)
 
 
-    filepath = check_existense("Giftwrapping")
-    run_number = get_last_number(filepath)
+    filepath = modules.check_existense(algorithm_name)
 
-    # Create and open a CSV file for logging
-    with open(filepath, 'a', newline='') as csvfile:
-
-        fieldnames = ["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"]
-        
-        writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
-
-        points = generate_points(num_points)
-
-        start_time = time.time()
-        process_start_time = time.process_time()
-
-        gift_wrapping(points)
-
-        process_end_time = time.process_time()
-        end_time = time.time()  # Record the end time
-        
-        process_execution_time = process_end_time - process_start_time
-        execution_time = end_time - start_time  # Calculate the execution time
-
-        # Write the execution time to the CSV file
-        writer.writerow({'Test_Case' : run_number, 'Number_of_Points': num_points, 
-                         'Execution Time': f":{execution_time:.4f}",
-                         'Execution Time on CPU' : f":{process_execution_time:.4f}"})
-    
-    # Manually close the CSV file
-    csvfile.close()
+    run_number = modules.open_csv_file(filepath, algorithm_name, num_points)
         
     print(f"Test Run {run_number} with {num_points} random points is finished")
 

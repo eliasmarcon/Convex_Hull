@@ -5,7 +5,7 @@ import pandas as pd
 
 from quickhull_folder.quickhull_performance import *
 from giftwrapping_folder.giftwrapping_performance import *
-from additional_files.modules import *
+from additional_files import modules
 
 from tkinter.scrolledtext import ScrolledText  # Import ScrolledText for multi-line text display
 from tkinter.font import Font
@@ -22,18 +22,21 @@ quickhull_time = initial_time
 def add_random_points():
 
     num_points_str = num_points_entry.get()
-    try:
-        num_points = int(num_points_str)
-        if num_points < 1:
-            return
-        for _ in range(num_points):
-            x = random.uniform(-500.0, 500.0)  # Adjust the range as needed
-            y = random.uniform(-500.0, 500.0)  # Adjust the range as needed
-            points.append((x, y))
-            display_point_count()
+    num_points = int(num_points_str)
+    # try:
+    #     if num_points < 1:
+    #         return
+    #     for _ in range(num_points):
+    #         x = random.uniform(-500.0, 500.0)  # Adjust the range as needed
+    #         y = random.uniform(-500.0, 500.0)  # Adjust the range as needed
+    #         points.append((x, y))
+    #         display_point_count()
 
-    except ValueError:
-        pass
+    # except ValueError:
+    #     pass
+
+    global POINTS
+    POINTS = modules.generate_points(num_points, POINTS)
 
 def add_random_points_on_enter(event):
 
@@ -217,6 +220,7 @@ add_random_button.grid(row=2, column=6, padx=5, pady=(5, 20), columnspan=3)
 ttk.Button(root, text="Quickhull Algorithm", command=quickhull_run).grid(row=3, column=0, padx=5, pady=5)
 ttk.Button(root, text="Giftwrapping Algorithm", command=giftwrapping_run).grid(row=3, column=3, padx=5, pady=5)
 ttk.Button(root, text="Compare both Algorithms", command=run_both_commands).grid(row=3, column=6, padx=5, pady=5)
+tk.Button(root, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=16, column=2, rowspan=2, padx=5, pady=5)
 
 
 ###################################################################################################################################
@@ -281,23 +285,23 @@ scrollbar.grid(row=10, column=8, columnspan=8, padx=10, pady=(10, 30))
 ###################################################################################################################################
 
 # Create a label to display the faster algorithm
-divide_and_conquer_dataframe_label = ttk.Label(root, text="Giftwrapping Dataframe of Test Cases", font=font_standard)
-divide_and_conquer_dataframe_label.grid(row=11, column=0, columnspan=8, padx=5, pady=5)
+giftwrapping_dataframe_label = ttk.Label(root, text="Giftwrapping Dataframe of Test Cases", font=font_standard)
+giftwrapping_dataframe_label.grid(row=11, column=0, columnspan=8, padx=5, pady=5)
 
 # Read the DataFrame from a CSV file
-df_divide_and_conquer = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Quickhull.csv', sep = ",")
-df_divide_and_conquer = df_divide_and_conquer.sort_values(by='Number_of_Points', ascending=False)
+df_giftwrapping = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Giftwrapping.csv', sep = ",")
+df_giftwrapping = df_giftwrapping.sort_values(by='Number_of_Points', ascending=False)
 
 # Create a Treeview widget to display the DataFrame
-tree = ttk.Treeview(root, columns=list(df_divide_and_conquer.columns), show='headings')
+tree = ttk.Treeview(root, columns=list(df_giftwrapping.columns), show='headings')
 
 # Add column headings
-for col in df_divide_and_conquer.columns:
+for col in df_giftwrapping.columns:
     tree.heading(col, text=col)
     tree.column(col, width=150)  # Adjust the width as needed
 
 # Insert DataFrame rows into the Treeview
-for i, row in df_divide_and_conquer.iterrows():
+for i, row in df_giftwrapping.iterrows():
     tree.insert('', 'end', values=row.tolist())
 
 # Create a scrollbar
@@ -305,8 +309,8 @@ scrollbar = ttk.Scrollbar(root, orient='vertical', command=tree.yview)
 tree.configure(yscroll=scrollbar.set)
 
 # Pack the Treeview and scrollbar into the window
-tree.grid(row=10, column=0, columnspan=8, padx=10, pady=(10, 30))
-scrollbar.grid(row=10, column=8, columnspan=8, padx=10, pady=(10,30))
+tree.grid(row=11, column=0, columnspan=8, padx=10, pady=(10, 30))
+scrollbar.grid(row=11, column=8, columnspan=8, padx=10, pady=(10,30))
 ###################################################################################################################################
 
 # Create a label to display the faster algorithm

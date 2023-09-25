@@ -2,9 +2,22 @@ import random
 import os
 import pandas as pd
 import csv
+import time
+
+from giftwrapping_folder import giftwrapping_performance
+from quickhull_folder import quickhull_performance
 
 
-def generate_points(num_points, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
+RANGE_X = -500.0
+RANGE_Y = 500.0
+
+
+def close_window(root):
+    
+    root.destroy()
+
+
+def generate_points(num_points, points_array = None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
     """
     Generate a list of random (x, y) coordinates.
 
@@ -16,12 +29,25 @@ def generate_points(num_points, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)
     Returns:
         list: A list of (x, y) coordinate tuples.
     """
-    points = []
-    
-    for _ in range(num_points):
-        x = random.uniform(x_range[0], x_range[1])
-        y = random.uniform(y_range[0], y_range[1])
-        points.append((x, y))
+    if points_array is None:
+
+        points = []
+
+    else:
+
+        points = points_array
+
+
+    unique_points = set()  # A set to store unique points
+
+    while len(unique_points) < num_points:
+        x = random.uniform(RANGE_X, RANGE_Y)
+        y = random.uniform(RANGE_X, RANGE_Y)
+        point = (x, y)
+
+        if point not in unique_points:
+            unique_points.add(point)
+            points.append(point)
     
     return points
 
@@ -74,12 +100,12 @@ def get_last_number(filepath):
 
     else:
 
-        last_run_number = run_numbers[-1]
+        last_run_number = run_numbers[-1] + 1
 
     return last_run_number
 
 
-def generate_num_points_array():
+def get_preset_points_array():
 
     num_points_array = [
 
@@ -113,3 +139,49 @@ def generate_num_points_array():
                     ]
     
     return num_points_array
+
+
+def open_csv_file(filepath, algorithm_name, num_points):
+        
+        run_number = get_last_number(filepath)
+
+        # Create and open a CSV file for logging
+        with open(filepath, 'a', newline='') as csvfile:
+
+            fieldnames = ["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"]
+            
+            writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
+
+            points = generate_points(num_points)
+
+            start_time = time.time()
+            process_start_time = time.process_time()
+
+            if algorithm_name == "Quickhull":
+
+                quickhull_performance.quickhull(points)
+
+            elif algorithm_name == "Giftwrapping":
+
+                giftwrapping_performance.gift_wrapping(points)
+
+            else:
+
+                exit()
+
+
+            process_end_time = time.process_time()
+            end_time = time.time()  # Record the end time
+            
+            process_execution_time = process_end_time - process_start_time
+            execution_time = end_time - start_time  # Calculate the execution time
+
+            # Write the execution time to the CSV file
+            writer.writerow({'Test_Case' : run_number, 'Number_of_Points': num_points, 
+                            'Execution Time': f"{execution_time:.4f}",
+                            'Execution Time on CPU' : f"{process_execution_time:.4f}"})
+        
+        # Manually close the CSV file
+        csvfile.close()
+
+        return run_number
