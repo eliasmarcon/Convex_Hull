@@ -52,11 +52,14 @@ root.title("Convex Hull Algorithm Home")
 
 center_window(root)  # Center the main window
 
+# Install packages from requirements.txt
+# subprocess.run(["pip", "install", "-r", "requirements.txt"])
+
 
 # Create labels to describe the options
 visual_mode_label = ttk.Label(root, text="Visual Mode:")
 optimized_mode_label = ttk.Label(root, text="Performance Optimized Mode:")
-quit_label = ttk.Label(root, text="Quit while Application:")
+quit_label = ttk.Label(root, text="Quit Application:")
 
 
 # Create buttons to open the respective modes

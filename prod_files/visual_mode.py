@@ -3,14 +3,15 @@ import matplotlib.pyplot as plt
 import random
 
 from quickhull_folder.quickhull import *
-from divide_and_conquer_algorithm.giftwrapping import *
+from giftwrapping_folder.giftwrapping import *
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from tkinter import ttk, filedialog
 
 ## Create a list to store the convex hull points
 CONVEX_HULL_POINTS = []
 POINTS = [] # Initialize an empty list to store points
-
+RANGE_X = -500.0
+RANGE_Y = 500.0
 
 def add_point():
 
@@ -30,20 +31,36 @@ def add_point():
 def add_random_points():
 
     num_points_str = num_points_entry.get()
+    num_points = int(num_points_str)
     
-    try:
-        num_points = int(num_points_str)
-        if num_points < 1:
-            return
-        for _ in range(num_points):
-            x = random.uniform(-500.0, 500.0)  # Adjust the range as needed
-            y = random.uniform(-500.0, 500.0)  # Adjust the range as needed
-            POINTS.append((x, y))
-        update_plot()
-        display_point_count()
+    # try:
+    #     if num_points < 1:
+    #         return
+    #     for _ in range(num_points):
+    #         x = random.uniform(RANGE_X, RANGE_Y)  # Adjust the range as needed
+    #         y = random.uniform(RANGE_X, RANGE_Y)  # Adjust the range as needed
+    #         POINTS.append((x, y))
+    #     update_plot()
+    #     display_point_count()
     
-    except ValueError:
-        pass
+    # except ValueError:
+    #     pass
+
+    unique_points = set()  # A set to store unique points
+
+    while len(unique_points) < num_points:
+        x = random.uniform(RANGE_X, RANGE_Y)
+        y = random.uniform(RANGE_X, RANGE_Y)
+        point = (x, y)
+
+        if point not in unique_points:
+            unique_points.add(point)
+            POINTS.append(point)
+
+    update_plot()
+    display_point_count()
+
+    return POINTS
 
 def add_point_on_enter(event):
 
@@ -70,7 +87,7 @@ def update_plot():
     if POINTS:
         
         x, y = zip(*POINTS)
-        ax.scatter(x, y, c='b', marker='o', label='Points')
+        ax.scatter(x, y, c='b', marker='o', label='Points', s = 2)
 
     canvas.draw()
 
@@ -187,7 +204,7 @@ tk.Button(root, text="Clear Points", command=clear_points).grid(row=3, column=1,
 ttk.Button(root, text="Upload File", command=open_file).grid(row=0, column=2, rowspan=2, padx=5, pady=5)
 ttk.Button(root, text="Clear Algorithm Run", command=update_plot).grid(row=1, column=2, rowspan=2, padx=5, pady=5)
 tk.Button(root, text="Quickhull", command=lambda:quickhull_run(fig, ax, canvas, root, POINTS)).grid(row=2, column=2, rowspan=2, padx=5, pady=5)
-tk.Button(root, text="Divide and Conquer", command=lambda:giftwrapping_run(ax, canvas, root, POINTS)).grid(row=3, column=2, rowspan=2, padx=5, pady=5)
+tk.Button(root, text="Giftwrapping", command=lambda:giftwrapping_run(ax, canvas, root, POINTS)).grid(row=3, column=2, rowspan=2, padx=5, pady=5)
 
 
 # Create a label to display the point count

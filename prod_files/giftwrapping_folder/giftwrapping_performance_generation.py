@@ -4,7 +4,7 @@ import csv
 import os
 import sys
 
-from quickhull_performance import *
+from giftwrapping_performance import *
 
 # Add the project root to the Python path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath("./additional_files/")))
@@ -26,7 +26,7 @@ def main():
         num_points = random.choice(num_points_array)
 
 
-    filepath = check_existense("Quickhull")
+    filepath = check_existense("Giftwrapping")
     run_number = get_last_number(filepath)
 
     # Create and open a CSV file for logging
@@ -41,7 +41,7 @@ def main():
         start_time = time.time()
         process_start_time = time.process_time()
 
-        quickhull(points)
+        gift_wrapping(points)
 
         process_end_time = time.process_time()
         end_time = time.time()  # Record the end time
@@ -63,19 +63,3 @@ def main():
 if __name__ == "__main__":
     
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
