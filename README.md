@@ -63,18 +63,13 @@ The project focuses on two well-known convex hull algorithms:
 
 * Quickhull: A divide-and-conquer algorithm known for its efficiency in finding the convex hull of a set of points in 2D. Example of the Algorithm:
 
-<video width="320" height="240" controls>
-    <source src="videos/Quickhull.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+https://github.com/eliasmarcon/Convex_Hull/assets/98773135/10d2c18a-7fb4-4aa3-b1f3-f0160ea19e97
 
 
 * Giftwrapping (also known as Jarvis March): An iterative algorithm that constructs the convex hull by choosing points in a counter-clockwise manner. Example of the Algorithm:
 
-<video width="320" height="240" controls>
-    <source src="videos/Giftwrapping.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+https://github.com/eliasmarcon/Convex_Hull/assets/98773135/9f0eecef-16b2-436e-80de-b003796e2c5a
+
 
 ### Data Generation:
 Two methods of generating input data for the algorithms are considered:
