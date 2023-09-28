@@ -3,85 +3,121 @@ import os
 import pandas as pd
 import csv
 import time
+import sys
+from tkinter import messagebox
+
+# Add the project root to the Python path
+# Determine the project root directory and add it to the sys.path
+giftwrapping_root = os.path.dirname(os.path.dirname(os.path.abspath("./giftwrapping_folder/")))
+sys.path.append(giftwrapping_root)
+
+quickhull_root = os.path.dirname(os.path.dirname(os.path.abspath("./quickhull_folder/")))
+sys.path.append(quickhull_root)
 
 from giftwrapping_folder import giftwrapping_performance
 from quickhull_folder import quickhull_performance
 
 
+# Define constants for the range of x and y coordinates
 RANGE_X = -500.0
 RANGE_Y = 500.0
 
-
+# Define a function to close the Tkinter window
 def close_window(root):
-    
+
     root.destroy()
 
+# Define a function to check if input is a digit
+def check_input(input):
+    
+    if not input.isdigit():
+    
+        messagebox.showerror("Error", "Incorrect input, the input has to be a number")
 
-def generate_points(num_points, points_array = None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
-    """
-    Generate a list of random (x, y) coordinates.
-
-    Args:
-        num_points (int): The number of points to generate.
-        x_range (tuple): The range of x coordinates (min_x, max_x).
-        y_range (tuple): The range of y coordinates (min_y, max_y).
-
-    Returns:
-        list: A list of (x, y) coordinate tuples.
-    """
-    if points_array is None:
-
-        points = []
-
+# Define a function to check if input for points is in the correct format
+def check_input_point(input):
+    
+    if "," not in input:
+    
+        messagebox.showerror("Error", "Incorrect input, the input has to contain a ',' to separate the x- and y-coordinate")
+    
+    elif input.count(",") > 1:
+    
+        messagebox.showerror("Error", "Incorrect input, the input has to contain max 1. ',' to separate the x- and y-coordinate")
+    
     else:
+    
+        try:
+    
+            x, y = map(float, input.split(","))
+    
+        except ValueError:
+    
+            messagebox.showerror("Error", "Incorrect input, the input has to be a number for the x- and y-coordinate")
 
+
+
+def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
+    
+    # Check if a custom points_array is provided; if not, initialize an empty list
+    if points_array is None:
+    
+        points = []
+    
+    else:
+    
         points = points_array
 
+    unique_points = set()  # Create an empty set to store unique points
 
-    unique_points = set()  # A set to store unique points
-
+    # Generate random points until the desired number of unique points is reached
     while len(unique_points) < num_points:
+    
+        # Generate random x and y coordinates within the specified ranges
         x = random.uniform(RANGE_X, RANGE_Y)
         y = random.uniform(RANGE_X, RANGE_Y)
         point = (x, y)
 
+        # Check if the generated point is unique; if so, add it to the points list and the unique_points set
         if point not in unique_points:
+    
             unique_points.add(point)
             points.append(point)
-    
+
     return points
 
 # Create an empty DataFrame
 # Get the current working directory
 def check_existense(algorithm_name):
 
+    # Get the current working directory
     current_directory = os.getcwd()
 
     # Navigate to the parent directory (move one folder back)
     parent_directory = os.path.dirname(current_directory)
 
+    # Create the file path by joining parent_directory, "test_csv_files," and a file name based on algorithm_name
     filepath = os.path.join(parent_directory, "test_csv_files", f"Testfile_{algorithm_name}.csv")
 
     # Check if the file exists
     if os.path.exists(filepath):
-
-        print(f"The file exists it will be updated.")
-
+    
+        print(f"The file exists; it will be updated.")
+    
     else:
-
+        # Create an empty DataFrame with specified column names
         df = pd.DataFrame(columns=["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"])
-        df.to_csv(f"{filepath}", index = False)
-
-        print(f"The file does not exist it will be created and filled.")
+        # Save the DataFrame as a CSV file at the specified filepath
+        df.to_csv(f"{filepath}", index=False)
+        print(f"The file does not exist; it will be created and filled.")
 
     return filepath
 
-
-def get_last_number(filepath):    
+def get_last_number(filepath):
     
     # Open and read the CSV file
     with open(filepath, 'r') as csvfile:
-        
+    
         reader = csv.DictReader(csvfile)
         
         # Initialize a list to store the run numbers
@@ -89,17 +125,16 @@ def get_last_number(filepath):
         
         # Iterate through the rows and extract the run numbers
         for row in reader:
-        
+    
             run_number = int(row['Test_Case'])
             run_numbers.append(run_number)
 
-
     if len(run_numbers) == 0:
-        
+    
         last_run_number = 0
-
+    
     else:
-
+        # Calculate the last run number as one greater than the maximum in the list
         last_run_number = run_numbers[-1] + 1
 
     return last_run_number
@@ -142,46 +177,60 @@ def get_preset_points_array():
 
 
 def open_csv_file(filepath, algorithm_name, num_points):
-        
-        run_number = get_last_number(filepath)
 
-        # Create and open a CSV file for logging
-        with open(filepath, 'a', newline='') as csvfile:
+    # Get the last run number from the existing CSV file
+    run_number = get_last_number(filepath)
 
-            fieldnames = ["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"]
-            
-            writer = csv.DictWriter(csvfile, fieldnames = fieldnames)
+    # Create and open a CSV file for logging (appending mode) and specify newline handling
+    with open(filepath, 'a', newline='') as csvfile:
+    
+        # Define the fieldnames for the CSV file
+        fieldnames = ["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"]
 
-            points = generate_points(num_points)
+        # Create a CSV DictWriter object with the specified fieldnames
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-            start_time = time.time()
-            process_start_time = time.process_time()
+        # Generate a list of random points based on the given num_points
+        points = generate_points(num_points)
 
-            if algorithm_name == "Quickhull":
+        # Record the start time of the execution
+        start_time = time.time()
+        # Record the start time of the process
+        process_start_time = time.process_time()
 
-                quickhull_performance.quickhull(points)
+        # Check the algorithm_name to determine which algorithm to execute
+        if algorithm_name == "Quickhull":
+    
+            # Execute the Quickhull algorithm on the generated points
+            quickhull_performance.quickhull(points)
+    
+        elif algorithm_name == "Giftwrapping":
+    
+            # Execute the Giftwrapping algorithm on the generated points
+            giftwrapping_performance.gift_wrapping(points)
+    
+        else:
+    
+            # If the algorithm_name is not recognized, exit the program
+            exit()
 
-            elif algorithm_name == "Giftwrapping":
+        # Record the end time of the process
+        process_end_time = time.process_time()
+        # Record the end time of the execution
+        end_time = time.time()
 
-                giftwrapping_performance.gift_wrapping(points)
+        # Calculate the execution time by subtracting start_time from end_time
+        execution_time = end_time - start_time
+        # Calculate the process execution time by subtracting process_start_time from process_end_time
+        process_execution_time = process_end_time - process_start_time
 
-            else:
+        # Write a row with execution results to the CSV file
+        writer.writerow({'Test_Case': run_number, 'Number_of_Points': num_points,
+                         'Execution Time': f"{execution_time:.4f}",
+                         'Execution Time on CPU': f"{process_execution_time:.4f}"})
 
-                exit()
+    # Manually close the CSV file
+    csvfile.close()
 
-
-            process_end_time = time.process_time()
-            end_time = time.time()  # Record the end time
-            
-            process_execution_time = process_end_time - process_start_time
-            execution_time = end_time - start_time  # Calculate the execution time
-
-            # Write the execution time to the CSV file
-            writer.writerow({'Test_Case' : run_number, 'Number_of_Points': num_points, 
-                            'Execution Time': f"{execution_time:.4f}",
-                            'Execution Time on CPU' : f"{process_execution_time:.4f}"})
-        
-        # Manually close the CSV file
-        csvfile.close()
-
-        return run_number
+    # Return the run number for reference
+    return run_number
