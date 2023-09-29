@@ -1,0 +1,7 @@
+pandas
+numpy
+tk
+matplotlib
+ipython
+
+
