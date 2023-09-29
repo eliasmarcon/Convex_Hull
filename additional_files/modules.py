@@ -25,6 +25,7 @@ RANGE_Y = 500.0
 # Define a function to close the Tkinter window
 def close_window(root):
 
+    """
     Args:
         root: The Tkinter window to close.
     """
@@ -35,13 +36,6 @@ def check_input(input):
 
     """
     Checks if the input is a digit.
-    Args:
-        input: The input to check.
-    """
-    
-    """
-    Checks if the input is a digit.
-
     Args:
         input: The input to check.
     """
