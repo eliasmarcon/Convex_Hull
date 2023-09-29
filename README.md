@@ -42,8 +42,7 @@
     </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-  <li><a href="#computer-vision-tensor-serve-and-dash">Computer Vision Tensor Serve and Dash</a></li>
+    </ol>
   </ol>
 </details>
 
@@ -81,7 +80,7 @@ Two methods of generating input data for the algorithms are considered:
     * If you are in the folder you can execute the following command:
 
     ```sh
-    python generating_file_input.py ["Giftwrapping", "Quickhull"] 300      
+    python performance_generation.py ["Giftwrapping", "Quickhull"] 300      
     ```
 
       the first argument has to be either ["Giftwrapping", "Quickhull"] in order to determine which CSV File should be updated. The second argument can be an integer in order to determine with how many points the test data should be generated. If you dont input an integer the programm will randomly choose a number of points which should be generated for the test case.

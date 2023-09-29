@@ -273,7 +273,7 @@ Grid.columnconfigure(lower_frame,0,weight=1)
 ###################################################################################################################################
 
 # Read the DataFrame from a CSV file
-df_quickhull = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Quickhull.csv', sep = ",")
+df_quickhull = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\test_csv_files\Testfile_Quickhull.csv', sep = ",")
 df_quickhull['Number_of_Points'] = df_quickhull['Number_of_Points'].astype(int)
 df_quickhull = df_quickhull.sort_values(by='Number_of_Points', ascending=False)
 
@@ -308,7 +308,7 @@ giftwrapping_dataframe_label = ttk.Label(lower_frame2, text="Giftwrapping Datafr
 giftwrapping_dataframe_label.grid(row=0, column=0, sticky=tk.N+tk.S)
 
 # Read the DataFrame from a CSV file
-df_giftwrapping = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Giftwrapping.csv', sep = ",")
+df_giftwrapping = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\test_csv_files\Testfile_Giftwrapping.csv', sep = ",")
 df_giftwrapping['Number_of_Points'] = df_giftwrapping['Number_of_Points'].astype(int)
 df_giftwrapping = df_giftwrapping.sort_values(by='Number_of_Points', ascending=False)
 
