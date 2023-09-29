@@ -276,7 +276,7 @@ Grid.columnconfigure(lower_frame,0,weight=1)
 
 # Read the DataFrame from a CSV file
 
-filepath_quickhull = r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\test_csv_files\Testfile_Quickhull.csv'
+filepath_quickhull = r'test_csv_files\Testfile_Quickhull.csv'
 df_quickhull = modules.check_csv_exist(filepath_quickhull)
 
 lower_frame_tree1 = tk.Frame(root)
@@ -310,7 +310,7 @@ giftwrapping_dataframe_label = ttk.Label(lower_frame2, text="Giftwrapping Datafr
 giftwrapping_dataframe_label.grid(row=0, column=0, sticky=tk.N+tk.S)
 
 # Read the DataFrame from a CSV file
-filepath_giftwrapping = r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\test_csv_files\Testfile_Giftwrapping.csv'
+filepath_giftwrapping = r'test_csv_files\Testfile_Giftwrapping.csv'
 df_giftwrapping = modules.check_csv_exist(filepath_giftwrapping)
 
 ###################################################################################################################################
