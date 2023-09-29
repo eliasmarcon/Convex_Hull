@@ -1,6 +1,6 @@
 import sys
 import os
-
+import random
 import modules
 
 def write_points_to_file(points, file_name):
@@ -32,8 +32,16 @@ def write_points_to_file(points, file_name):
 
 def main():
     
-    # Get the number of points as a command-line argument
-    num_points = int(sys.argv[1])
+    # Check if command-line arguments were provided
+    if len(sys.argv) > 1:
+    
+        # Get the number of points as a command-line argument
+        num_points = int(sys.argv[1])
+    
+    else:
+    
+        # If no command-line argument is provided, randomly select a number of points from the preset array
+        num_points = random.choice(modules.get_preset_points_array())
 
     # Generate a list of random points based on the specified number of points
     points = modules.generate_points(num_points)

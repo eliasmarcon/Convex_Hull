@@ -14,7 +14,7 @@ def main():
     algorithm_name = sys.argv[1] # options [Giftwrapping, Quickhull]
 
     # Check if command-line arguments were provided
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
     
         # Parse the number of points from the first command-line argument
         num_points = int(sys.argv[2])

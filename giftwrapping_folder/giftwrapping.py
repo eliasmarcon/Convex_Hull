@@ -3,10 +3,7 @@ import numpy as np
 
 from IPython.display import clear_output
 
-# Function to introduce a delay in seconds
-def time_sleep(integer):
-
-    time.sleep(integer)
+time_sleeping = 1.0
 
 # Function to check if we have a counter-clockwise turn
 def is_counter_clockwise(p1, p2, p3):
@@ -22,10 +19,8 @@ def update_plot(ax, canvas, current_hull):
     # Plot dashed lines connecting current hull points
     ax.plot(current_hull[:, 0], current_hull[:, 1], 'k--', picker=5, linewidth=1)
     
-    clear_output(wait=True)  # Clear the current output
-    
     canvas.draw()  # Redraw the canvas
-    time_sleep(1)  # Introduce a 1-second delay
+    time.sleep(time_sleeping)  # Introduce a 1-second delay
     
     return ax, canvas
 
@@ -35,10 +30,8 @@ def last_connection(ax, canvas, convex_hull_points):
     # Plot dashed line connecting the last and first points in the convex hull
     ax.plot([convex_hull_points[-1, 0], convex_hull_points[0, 0]], [convex_hull_points[-1, 1], convex_hull_points[0, 1]], 'k--', picker=5, linewidth=1)
     
-    clear_output(wait=True)
-    
     canvas.draw()
-    time_sleep(1)
+    time.sleep(time_sleeping)
     
     return ax, canvas
 
@@ -53,8 +46,6 @@ def final_hull(ax, canvas, convex_hull_points):
     
     # Scatter plot of final convex hull points
     ax.scatter([x[0] for x in convex_hull_points], [y[1] for y in convex_hull_points], c='r', marker='o', label='Highlighted Points')
-    
-    clear_output(wait=True)
     
     canvas.draw()
 
@@ -104,7 +95,7 @@ def gift_wrapping_calculation(ax, canvas, root, points):
     ax, canvas = last_connection(ax, canvas, convex_hull_points)
     
     root.update()  # Update the GUI
-    time_sleep(1)
+    time.sleep(time_sleeping)
     
     final_hull(ax, canvas, convex_hull_points)
     root.update()  # Update the GUI
@@ -112,7 +103,10 @@ def gift_wrapping_calculation(ax, canvas, root, points):
     return convex_hull_points
 
 # Function to initiate the Gift Wrapping algorithm
-def gift_wrapping(ax, canvas, root, points):
+def gift_wrapping(ax, canvas, root, points, current_value):
+
+    global time_sleeping
+    time_sleeping = current_value
     
     convex_hull_points = gift_wrapping_calculation(ax, canvas, root, points)
     

@@ -2,9 +2,15 @@
 - [x] Refactoring
 - [x] Commenting
 - [x] Variable Names
-- [] Read ME
-- [] Testprotokoll
+- [x] Read ME
+  - [] Update CSV File Video einfügen
+  - [] Anlegen eines Text Files mit Punkten Video einfügen
+  - [] Add option dass man beim txt file keinen parameter übergeben muss (random wahl dann)
+- [] Testprotokolle
+- [x] Timekontrolle bei dem Plot hinzufügen also input mit wie lange man wartet bis sich der plot updated
 - [] Testfälle erstellen
+  - [] Algos beschreiben (best/worst case, aufwandsabschätzung anhand der Beispiele), Deckblatt, Struktur inhaltsverzeichnis, Seiten 3-5, Testmessungen
+- [x] Makefile? and Executable? --> batch file passt
 - [x] Design 
 
 
@@ -74,11 +80,40 @@ https://github.com/eliasmarcon/Convex_Hull/assets/98773135/9f0eecef-16b2-436e-80
 ### Data Generation:
 Two methods of generating input data for the algorithms are considered:
 
-1. Randomly Generated Test Data: A set of 2D points with float values is generated randomly to create a dataset for convex hull computation.
+1. Randomly Generated Test Data: A set of 2D points with float values is generated randomly to create a dataset for convex hull computation. Example how do do this:
+
+  * In order to generate/add test data you have to switch into the **additional_files** folder with the following command:
+    
+    ```sh
+    cd additional_files      
+    ```
+
+  * If you are in the folder you can execute the following command:
+
+    ```sh
+    python generating_file_input.py ["Giftwrapping", "Quickhull"] 300      
+    ```
+
+    the first argument has to be either ["Giftwrapping", "Quickhull"] in order to determine which CSV File should be updated. The second argument can be an integer in order to determine with how many points the test data should be generated. If you dont input an integer the programm will randomly choose a number of points which should be generated for the test case.
+
+
+
 2. File Import with Simple File Format: Alternatively, users can import data from a file with a specific format:
     * The first line indicates the number of points, 'n'.
     * The subsequent 'n' lines contain 'x, y' comma-separated float values for each point.
     * Larger datasets are recommended for meaningful performance measurements.
+
+    * In order to generate/add test data you have to switch into the **additional_files** folder with the following command:
+    
+    ```sh
+    cd additional_files      
+    ```
+
+  * If you are in the folder you can execute the following command, you can also add an integer in order to determine how many random points should be generated (optional). If you dont input an integer it will randomly choose a number of points which should be generated:
+
+    ```sh
+    python generating_file_input.py 300 (Text file with 300 points would be generated)     
+    ```
 
 ### Modes of Operation:
 The project offers two modes of operation to cater to different user needs:
@@ -135,7 +170,7 @@ If you want to run the code locally, proceed with the following steps:
     or 
 
     ```sh
-    open the executable file
+    open the executable file (here the requirements were installed automatically)
     ```
 
 

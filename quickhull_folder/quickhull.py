@@ -4,15 +4,12 @@ import math
 
 from IPython.display import clear_output
 
-# Function to sleep for a given number of seconds
-def time_sleep(integer):
-
-    time.sleep(integer)
+time_sleeping = 1.0
 
 # Function to initialize the plot with convex hull points
-def initial_plot_updated(fig, ax, canvas, convex_hull):
+def initial_plot_updated(ax, canvas, convex_hull):
     
-    time_sleep(1)
+    time.sleep(time_sleeping)
     
     # Draw Convex Hull points in red
     ax.scatter([x[0] for x in convex_hull], [y[1] for y in convex_hull], c='r', marker='o', label='Highlighted Points')
@@ -20,15 +17,14 @@ def initial_plot_updated(fig, ax, canvas, convex_hull):
     # Draw a dashed line connecting the highlighted points
     ax.plot([x[0] for x in convex_hull], [y[1] for y in convex_hull], 'k--', linewidth=1, label='Line between Highlighted Points')
     
-    clear_output(wait=True)
     canvas.draw()
     
-    return fig, ax, canvas
+    return ax, canvas
 
 # Function to update the plot internally when computing the convex hull
-def update_plot_internally(fig, ax, p1, p2, farthest_point, canvas):
+def update_plot_internally(ax, p1, p2, farthest_point, canvas):
     
-    time_sleep(1)
+    time.sleep(time_sleeping)
     
     # Draw the farthest Convex Hull point in red
     ax.scatter(farthest_point[0], farthest_point[1], c='r', marker='o')
@@ -37,15 +33,14 @@ def update_plot_internally(fig, ax, p1, p2, farthest_point, canvas):
     ax.plot([farthest_point[0], p1[0]], [farthest_point[1], p1[1]], 'k--', linewidth=1)
     ax.plot([farthest_point[0], p2[0]], [farthest_point[1], p2[1]], 'k--', linewidth=1)
     
-    clear_output(wait=True)
     canvas.draw()
     
-    return fig, ax, canvas
+    return ax, canvas
 
 # Function to create the final plot of the convex hull
-def final_plot(fig, ax, convex_hull, canvas):
+def final_plot(ax, convex_hull, canvas):
     
-    time_sleep(1)
+    time.sleep(time_sleeping)
     
     # Convert convex_hull to numpy array for easier manipulation
     convex_hull = np.array(convex_hull)
@@ -69,7 +64,6 @@ def final_plot(fig, ax, convex_hull, canvas):
         y = convex_hull[:, 1]
         ax.plot(x, y, 'r-', linewidth=2)
     
-    clear_output(wait=True)
     canvas.draw()
 
 # Function to find the distance between a point and a line defined by two points
@@ -114,7 +108,7 @@ def create_segment(p1, p2, v):
     return above, below
 
 # Recursive function to compute the upper or lower hull
-def upper_lower_hull(fig, ax, p1, p2, segment, flag, canvas, root):
+def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
     
     if segment == [] or p1 is None or p2 is None:
 
@@ -139,7 +133,7 @@ def upper_lower_hull(fig, ax, p1, p2, segment, flag, canvas, root):
     if farthest_point:
 
         convex_hull = convex_hull + [farthest_point]
-        fig, ax, canvas = update_plot_internally(fig, ax, p1, p2, farthest_point, canvas)
+        ax, canvas = update_plot_internally(ax, p1, p2, farthest_point, canvas)
         root.update()  # Update the GUI
 
     # Remove the farthest point from the segment
@@ -152,18 +146,21 @@ def upper_lower_hull(fig, ax, p1, p2, segment, flag, canvas, root):
     # Only use the segments in the same direction; the opposite direction is contained in the convex hull
     if flag == "above":
 
-        convex_hull = convex_hull + upper_lower_hull(fig, ax, p1, farthest_point, point1above, "above", canvas, root)
-        convex_hull = convex_hull + upper_lower_hull(fig, ax, farthest_point, p2, point2above, "above", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, p1, farthest_point, point1above, "above", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, farthest_point, p2, point2above, "above", canvas, root)
 
     else:
 
-        convex_hull = convex_hull + upper_lower_hull(fig, ax, p1, farthest_point, point1below, "below", canvas, root)
-        convex_hull = convex_hull + upper_lower_hull(fig, ax, farthest_point, p2, point2below, "below", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, p1, farthest_point, point1below, "below", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, farthest_point, p2, point2below, "below", canvas, root)
 
     return convex_hull
 
 # Main function to compute the convex hull using the Quickhull algorithm
-def quickhull(fig, ax, canvas, root, points):
+def quickhull(ax, canvas, root, points, current_value):
+
+    global time_sleeping
+    time_sleeping = current_value
 
     if len(points) <= 1:
 
@@ -179,27 +176,27 @@ def quickhull(fig, ax, canvas, root, points):
 
         if len(points) == 2:
 
-            fig, ax, canvas = initial_plot_updated(fig, ax, canvas, convex_hull)
+            ax, canvas = initial_plot_updated(ax, canvas, convex_hull)
 
-            return fig, ax, points
+            return ax, points
 
         sort.pop(0)
         sort.pop(-1)
 
-        fig, ax, canvas = initial_plot_updated(fig, ax, canvas, convex_hull)
+        ax, canvas = initial_plot_updated(ax, canvas, convex_hull)
         root.update()  # Update the GUI
 
         above, below = create_segment(p1, p2, sort)
 
-        convex_hull = convex_hull + upper_lower_hull(fig, ax, p1, p2, above, "above", canvas, root)
-        convex_hull = convex_hull + upper_lower_hull(fig, ax, p1, p2, below, "below", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, p1, p2, above, "above", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, p1, p2, below, "below", canvas, root)
 
-        final_plot(fig, ax, convex_hull, canvas)
+        final_plot(ax, convex_hull, canvas)
 
         return convex_hull
 
     else:
 
-        final_plot(fig, ax, points, canvas)
+        final_plot(ax, points, canvas)
 
         return points

@@ -6,10 +6,11 @@ from giftwrapping_folder.giftwrapping import *
 from additional_files import modules
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from tkinter import ttk, filedialog, Grid
+from tkinter import ttk, filedialog, Grid, messagebox
 
 
 POINTS = []  # Initialize an empty list to store points
+current_value = 1.0
 
 # Function to add a point
 def add_point():
@@ -66,14 +67,14 @@ def display_point_count():
     point_count_label.config(text=f"Number of Points: {len(POINTS)}")  # Update the point count label
 
 # Function to run the Quickhull algorithm
-def quickhull_run(fig, ax, canvas, root, POINTS):
+def quickhull_run(ax, canvas, root, POINTS, current_value):
 
-    convex_hull = quickhull(fig, ax, canvas, root, POINTS)  # Run Quickhull algorithm
+    convex_hull = quickhull(ax, canvas, root, POINTS, current_value)  # Run Quickhull algorithm
 
 # Function to run the Giftwrapping algorithm
-def giftwrapping_run(ax, canvas, root, POINTS):
+def giftwrapping_run(ax, canvas, root, POINTS, current_value):
 
-    convex_hull = gift_wrapping(ax, canvas, root, POINTS)  # Run Giftwrapping algorithm
+    convex_hull = gift_wrapping(ax, canvas, root, POINTS, current_value)  # Run Giftwrapping algorithm
 
 # Function to center the main window
 def center_window(root):
@@ -115,6 +116,20 @@ def open_file():
 
         display_point_count()
         update_plot()
+
+# Function to update the spinbox and save the current_value
+def on_spinbox_update(event=None):
+
+    global current_value
+    current_value = float(spinbox.get())
+
+    if current_value > 10.0:
+    
+        messagebox.showerror("Error", "Incorrect input, the max number is 10")
+
+    else:
+
+        value_label.config(text=f"Current Time Value for updating the Plot: {current_value:.1f} Seconds")
 
 #####################################################################################################################
 #####################################################################################################################
@@ -168,15 +183,32 @@ Grid.columnconfigure(upper_frame,1,weight=1)
 ###########################################################################################
 
 # GUI elements for adding random points
-ttk.Button(upper_frame, text="Quickhull Algorithm", command=lambda:quickhull_run(fig, ax, canvas, upper_frame, POINTS)).grid(row=1, column=2, padx=(60, 60), pady=5, sticky="NSEW")
-ttk.Button(upper_frame, text="Giftwrapping Algorithm", command=lambda:giftwrapping_run(ax, canvas, upper_frame, POINTS)).grid(row=2, column=2, padx=(60, 60), pady=5, sticky="NSEW")
-ttk.Button(upper_frame, text="Clear Algorithm Run", command=update_plot).grid(row=3, column=2, padx=(60, 60), pady=5, sticky="NSEW")
+
+# Create a label to display the current value with a smaller font
+value_label = tk.Label(upper_frame, text="Current Time Value for updating the Plot: 1.0 Seconds")
+value_label.grid(row=0, column=2, pady=5)
+
+# Create a Spinbox that allows values from 0 to 5 in 0.5 steps
+spinbox = tk.Spinbox(upper_frame, from_=0.0, to=10.0, increment=0.5, command=on_spinbox_update)
+spinbox.grid(row=1, column=2, pady=5)
+
+# Initialize the Spinbox value
+spinbox.delete(0, tk.END)  # Clear the default value
+spinbox.insert(0, current_value)
+
+# Bind the <Return> key event to the Spinbox
+spinbox.bind("<Return>", on_spinbox_update)
+
+
+ttk.Button(upper_frame, text="Quickhull Algorithm", command=lambda:quickhull_run(ax, canvas, upper_frame, POINTS, current_value)).grid(row=2, column=2, padx=(60, 60), pady=5, sticky="NSEW")
+ttk.Button(upper_frame, text="Giftwrapping Algorithm", command=lambda:giftwrapping_run(ax, canvas, upper_frame, POINTS, current_value)).grid(row=3, column=2, padx=(60, 60), pady=5, sticky="NSEW")
 
 ##########################################################################################
 
 # Create a button to trigger file upload
-ttk.Button(upper_frame, text="Upload File", command=open_file).grid(row=1, column=3, padx=(60, 20), pady=5, sticky="NSEW")
-ttk.Button(upper_frame, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=2, column=3, padx=(60, 20), pady=5, sticky="NSEW")
+ttk.Button(upper_frame, text="Clear Algorithm Run", command=update_plot).grid(row=1, column=3, padx=(60, 20), pady=5, sticky="NSEW")
+ttk.Button(upper_frame, text="Upload File", command=open_file).grid(row=2, column=3, padx=(60, 20), pady=5, sticky="NSEW")
+ttk.Button(upper_frame, text="Quit Window", command=lambda:modules.close_window(root)).grid(row=3, column=3, padx=(60, 20), pady=5, sticky="NSEW")
 
 ##########################################################################################
 
