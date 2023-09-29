@@ -1,8 +1,9 @@
 ## Todos
-- [] Refactoring
-- [] Commenting
-- [] Testfälle erstellen
-  - [] Algos beschreiben (best/worst case, aufwandsabschätzung anhand der Testbeispiele), Deckblatt, Struktur inhaltsverzeichnis (Vorlage eines Labs von der FH), Seiten 3-5 (hat er aber offen gelassen), Testmessungen
+- [ ] Refactoring
+- [x] Commenting
+- [ ] Python Doc
+- [ ] Testfälle erstellen
+  - [ ] Algos beschreiben (best/worst case, aufwandsabschätzung anhand der Testbeispiele), Deckblatt, Struktur inhaltsverzeichnis (Vorlage eines Labs von der FH), Seiten 3-5 (hat er aber offen gelassen), Testmessungen
 
 <a name="readme-top"></a>
 

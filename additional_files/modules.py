@@ -24,11 +24,22 @@ RANGE_Y = 500.0
 
 # Define a function to close the Tkinter window
 def close_window(root):
+    """
+    Closes the Tkinter window.
 
+    Args:
+        root: The Tkinter window to close.
+    """
     root.destroy()
 
 # Define a function to check if input is a digit
 def check_input(input):
+    """
+    Checks if the input is a digit.
+
+    Args:
+        input: The input to check.
+    """
     
     if not input.isdigit():
     
@@ -36,6 +47,13 @@ def check_input(input):
 
 # Define a function to check if input for points is in the correct format
 def check_input_point(input):
+    """
+    Checks if the input for points is in the correct format.
+
+    Args:
+        input (string): String containing the x- and y-coordinate of a point, separated 
+        by a comma.
+    """
     
     if "," not in input:
     
@@ -57,7 +75,20 @@ def check_input_point(input):
 
 
 
-def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
+def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), 
+                    y_range=(-500.0, 500.0)):
+    """
+    Generate a list of random points with x and y coordinates within the specified ranges.
+
+    Args:
+        num_points (int): The number of points to generate.
+        points_array (array, optional): Already existing list of points. Defaults to None.
+        x_range (tuple, optional): Range of x coordinates. Defaults to (-500.0, 500.0).
+        y_range (tuple, optional): Range of y coordinates. Defaults to (-500.0, 500.0).
+
+    Returns:
+        array: List 
+    """
     
     # Check if a custom points_array is provided; if not, initialize an empty list
     if points_array is None:
