@@ -25,10 +25,22 @@ RANGE_Y = 500.0
 # Define a function to close the Tkinter window
 def close_window(root):
 
+    """
+    Closes the Tkinter window.
+    Args:
+        root: The Tkinter window to close.
+    """
+
     root.destroy()
 
 # Define a function to check if input is a digit
 def check_input(input):
+
+    """
+    Checks if the input is a digit.
+    Args:
+        input: The input to check.
+    """
     
     if not input.isdigit():
     
@@ -36,6 +48,13 @@ def check_input(input):
 
 # Define a function to check if input for points is in the correct format
 def check_input_point(input):
+
+    """
+    Checks if the input for points is in the correct format.
+    Args:
+        input (string): String containing the x- and y-coordinate of a point, separated 
+        by a comma.
+    """
     
     if "," not in input:
     
@@ -58,6 +77,17 @@ def check_input_point(input):
 
 
 def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
+
+    """
+    Generate a list of random points with x and y coordinates within the specified ranges.
+    Args:
+        num_points (int): The number of points to generate.
+        points_array (array, optional): Already existing list of points. Defaults to None.
+        x_range (tuple, optional): Range of x coordinates. Defaults to (-500.0, 500.0).
+        y_range (tuple, optional): Range of y coordinates. Defaults to (-500.0, 500.0).
+    Returns:
+        array: List 
+    """
     
     # Check if a custom points_array is provided; if not, initialize an empty list
     if points_array is None:
@@ -106,7 +136,7 @@ def check_existense(algorithm_name):
     
     else:
         # Create an empty DataFrame with specified column names
-        df = pd.DataFrame(columns=["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"])
+        df = pd.DataFrame(columns=["Test_Case", "Number_of_Points", "Execution Time"])
         # Save the DataFrame as a CSV file at the specified filepath
         df.to_csv(f"{filepath}", index=False)
         print(f"The file does not exist; it will be created and filled.")
@@ -131,13 +161,41 @@ def get_last_number(filepath):
 
     if len(run_numbers) == 0:
     
-        last_run_number = 0
+        last_run_number = 1
     
     else:
         # Calculate the last run number as one greater than the maximum in the list
         last_run_number = run_numbers[-1] + 1
 
     return last_run_number
+
+
+# Function to check if the csvs are there or not
+def check_csv_exist(filepath):
+
+    if os.path.isfile(filepath):
+
+        file_size = os.path.getsize(filepath)
+        
+        df = pd.read_csv(filepath, sep = ",")
+
+        if file_size > 0:
+         
+            df['Number_of_Points'] = df['Number_of_Points'].astype(int)
+            df = df.sort_values(by='Number_of_Points', ascending=False)
+
+        return df
+    
+    else:
+
+        # strings = filepath.split("\\")
+        # filename = strings[-1].split(".")[0]
+        # messagebox.showerror("Error", f"Please create the File {filename}")
+
+        # Create an empty DataFrame with specified column names
+        df = pd.DataFrame(columns=["Test_Case", "Number_of_Points", "Execution Time"])
+        # Save the DataFrame as a CSV file at the specified filepath
+        df.to_csv(f"{filepath}", index=False)
 
 
 def get_preset_points_array():
@@ -185,7 +243,7 @@ def open_csv_file(filepath, algorithm_name, num_points):
     with open(filepath, 'a', newline='') as csvfile:
     
         # Define the fieldnames for the CSV file
-        fieldnames = ["Test_Case", "Number_of_Points", "Execution Time", "Execution Time on CPU"]
+        fieldnames = ["Test_Case", "Number_of_Points", "Execution Time"]
 
         # Create a CSV DictWriter object with the specified fieldnames
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -195,8 +253,6 @@ def open_csv_file(filepath, algorithm_name, num_points):
 
         # Record the start time of the execution
         start_time = time.time()
-        # Record the start time of the process
-        process_start_time = time.process_time()
 
         # Check the algorithm_name to determine which algorithm to execute
         if algorithm_name == "Quickhull":
@@ -214,20 +270,15 @@ def open_csv_file(filepath, algorithm_name, num_points):
             # If the algorithm_name is not recognized, exit the program
             exit()
 
-        # Record the end time of the process
-        process_end_time = time.process_time()
         # Record the end time of the execution
         end_time = time.time()
 
         # Calculate the execution time by subtracting start_time from end_time
         execution_time = end_time - start_time
-        # Calculate the process execution time by subtracting process_start_time from process_end_time
-        process_execution_time = process_end_time - process_start_time
 
         # Write a row with execution results to the CSV file
         writer.writerow({'Test_Case': run_number, 'Number_of_Points': num_points,
-                         'Execution Time': f"{execution_time:.4f}",
-                         'Execution Time on CPU': f"{process_execution_time:.4f}"})
+                         'Execution Time': f"{execution_time:.4f}"})
 
     # Manually close the CSV file
     csvfile.close()

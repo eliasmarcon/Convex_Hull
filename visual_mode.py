@@ -79,13 +79,13 @@ def giftwrapping_run(ax, canvas, root, POINTS, current_value):
 # Function to center the main window
 def center_window(root):
 
-    window_width = int(root.winfo_screenwidth() * 0.4)
-    window_height = int(root.winfo_screenheight() * 0.5)
+    window_width = 1100 #int(root.winfo_screenwidth() * 0.4)
+    window_height = 800 #int(root.winfo_screenheight() * 0.5)
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
     x = int((screen_width / 2) - (window_width / 2))
     y = int((screen_height / 2) - (window_height / 2))
-    root.geometry(f'{window_width}x{window_height}+{int(x)}+{int(y)}')
+    root.geometry(f'{window_width}x{window_height}+{x}+{y}')
 
 # Function to handle file selection and reading
 def open_file():
