@@ -12,6 +12,14 @@ def write_points_to_file(points, file_name):
         file_name: name of the file to write to
     '''
 
+    '''
+    Write a list of points to a text file.
+    
+    args:
+        points: list of points to write to the file
+        file_name: name of the file to write to
+    '''
+
     # Get the current working directory
     current_directory = os.getcwd()
 
@@ -42,6 +50,10 @@ def main():
     Generate a list of random points and write them to a text file.    
     """
     
+    """
+    Generate a list of random points and write them to a text file.    
+    """
+
     # Check if command-line arguments were provided
     if len(sys.argv) > 1:
     

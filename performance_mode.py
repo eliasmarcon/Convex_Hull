@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
 import pandas as pd
+import os
 
 from quickhull_folder.quickhull_performance import *
 from giftwrapping_folder.giftwrapping_performance import *
@@ -73,8 +74,8 @@ def update_faster_algorithm_label():
 # Function to center the main window
 def center_window(root):
     
-    window_width = int(root.winfo_screenwidth() * 0.5) 
-    window_height = int(root.winfo_screenheight() * 0.7)
+    window_width = 1000 #int(root.winfo_screenwidth() * 0.5) 
+    window_height = 850 #int(root.winfo_screenheight() * 0.7)
 
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
@@ -117,6 +118,7 @@ def open_file():
                 num_points_label.config(text="Invalid file format")
 
             display_point_count()
+
 
 
 ##########################################################################################################################
@@ -273,9 +275,9 @@ Grid.columnconfigure(lower_frame,0,weight=1)
 ###################################################################################################################################
 
 # Read the DataFrame from a CSV file
-df_quickhull = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Quickhull.csv', sep = ",")
-df_quickhull['Number_of_Points'] = df_quickhull['Number_of_Points'].astype(int)
-df_quickhull = df_quickhull.sort_values(by='Number_of_Points', ascending=False)
+
+filepath_quickhull = r'test_csv_files\Testfile_Quickhull.csv'
+df_quickhull = modules.check_csv_exist(filepath_quickhull)
 
 lower_frame_tree1 = tk.Frame(root)
 lower_frame_tree1.pack(fill = "both", expand = True) 
@@ -295,9 +297,9 @@ for i, row in df_quickhull.iterrows():
 
 # Create a scrollbar
 scrollbar = ttk.Scrollbar(lower_frame_tree1, orient='vertical', command=tree_quickhull.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand = True)
+scrollbar.pack(side="right", fill="y")
 tree_quickhull.configure(yscroll=scrollbar.set)
-tree_quickhull.pack(side=tk.LEFT, fill=tk.Y, expand = True, pady=20, padx=10)
+tree_quickhull.pack(side="left", expand=True, fill="both", pady=20, padx=10)
 
 # ###################################################################################################################################
 lower_frame2 = tk.Frame(root)
@@ -308,9 +310,8 @@ giftwrapping_dataframe_label = ttk.Label(lower_frame2, text="Giftwrapping Datafr
 giftwrapping_dataframe_label.grid(row=0, column=0, sticky=tk.N+tk.S)
 
 # Read the DataFrame from a CSV file
-df_giftwrapping = pd.read_csv(r'C:\Users\User\OneDrive - FH Technikum Wien\1_Semester\Advanced_Programming\Convex_Hull\prod_files\test_csv_files\Testfile_Giftwrapping.csv', sep = ",")
-df_giftwrapping['Number_of_Points'] = df_giftwrapping['Number_of_Points'].astype(int)
-df_giftwrapping = df_giftwrapping.sort_values(by='Number_of_Points', ascending=False)
+filepath_giftwrapping = r'test_csv_files\Testfile_Giftwrapping.csv'
+df_giftwrapping = modules.check_csv_exist(filepath_giftwrapping)
 
 ###################################################################################################################################
 
@@ -338,9 +339,9 @@ for i, row in df_giftwrapping.iterrows():
 
 # Create a scrollbar
 scrollbar = ttk.Scrollbar(lower_frame2_tree2, orient='vertical', command=tree_giftwrapping.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand = True)
+scrollbar.pack(side="right", fill="y")
 tree_giftwrapping.configure(yscroll=scrollbar.set)
-tree_giftwrapping.pack(side=tk.LEFT, fill=tk.Y, expand = True, pady=20, padx=10)
+tree_giftwrapping.pack(side="left", expand=True, fill="both", pady=20, padx=10)
 
 
 # Run the Tkinter main loop for the performance optimized mode
