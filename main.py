@@ -4,6 +4,11 @@ import subprocess  # Used to run external scripts
 
 # Function to center the Tkinter window on the screen
 def center_window(root):
+    """Function to center the Tkinter window on the screen
+
+    Args:
+        root: root object (Tkinter main window)
+    """
     
     window_width = 450  # Width of the window
     window_height = 175  # Height of the window
@@ -19,13 +24,14 @@ def center_window(root):
 
 # Function to start a subprocess for the visual mode
 def start_subprocess_visual_mode():
-    
+    """Function to start a subprocess for the visual mode
+    """
     global subprocess1
     subprocess1 = subprocess.Popen(['python', 'visual_mode.py'])
 
 # Function to start a subprocess for the performance optimized mode
 def start_subprocess_performance_mode():
-    
+    """Function to start a subprocess for the performance optimized mode"""
     global subprocess2
     subprocess2 = subprocess.Popen(['python', 'performance_mode.py'])
 
@@ -41,7 +47,7 @@ def restart_subprocess_visual_mode():
 
 # Function to restart the subprocess for the performance optimized mode
 def restart_subprocess_performance_mode():
-    
+    """Function to restart the subprocess for the performance optimized mode"""
     if 'subprocess2' in globals():
     
         subprocess2.terminate()
@@ -51,7 +57,7 @@ def restart_subprocess_performance_mode():
 
 # Function to quit the application and terminate subprocesses if running
 def quit_application():
-
+    """Function to quit the application and terminate subprocesses if running"""
     if 'subprocess1' in globals():
 
         subprocess1.terminate()

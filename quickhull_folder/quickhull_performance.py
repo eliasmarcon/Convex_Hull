@@ -1,8 +1,21 @@
 import math
 
 # Function to find the distance between a point and a line defined by two points
-def find_distance(p1, p2, p3):
+import math
 
+def find_distance(p1, p2, p3):
+    """
+    Calculates the distance between a line defined by two points (p1 and p2) and a third point (p3).
+    
+    Args:
+    p1 (tuple): A tuple representing the (x, y) coordinates of the first point.
+    p2 (tuple): A tuple representing the (x, y) coordinates of the second point.
+    p3 (tuple): A tuple representing the (x, y) coordinates of the third point.
+    
+    Returns:
+    float: The distance between the line defined by p1 and p2 and the point p3.
+    """
+    
     # Calculate coefficients for the line equation ax + by + c = 0
     a = p1[1] - p2[1]
     b = p2[0] - p1[0]
@@ -13,6 +26,20 @@ def find_distance(p1, p2, p3):
 
 # Function to create segments above and below a line defined by two points
 def create_segment(p1, p2, v):
+    """
+    Given two points p1 and p2 and a set of points v, this function creates a segment between p1 and p2 and returns two lists:
+    above - containing all the points in v that are above the line formed by p1 and p2
+    below - containing all the points in v that are below the line formed by p1 and p2
+
+    Args:
+        p1 (tuple): A tuple representing the (x, y) coordinates of the first point of the line.
+        p2 (tuple): A tuple representing the (x, y) coordinates of the second point of the line.
+        v (list): A list of tuples representing the (x, y) coordinates of the points.
+
+    Returns:
+        above (list): A list of tuples representing the (x, y) coordinates of the points above the line.
+        below (list): A list of tuples representing the (x, y) coordinates of the points below the line.
+    """
     
     above = []
     below = []
@@ -42,6 +69,16 @@ def create_segment(p1, p2, v):
 
 # Recursive function to compute the upper or lower hull
 def upper_lower_hull(p1, p2, segment, flag):
+    """
+    This function calculates the upper or lower hull of a set of points using the Quickhull algorithm.
+    Args:
+        p1 (tuple): A tuple representing the (x, y) coordinates of the first point of the line.
+        p2 (tuple): A tuple representing the (x, y) coordinates of the second point of the line.
+        segment (list): A list of tuples representing the (x, y) coordinates of the points.
+        flag (str): A string to indicate whether the upper or lower hull is being calculated.
+    Returns:
+        convex_hull (list): A list of tuples representing the (x, y) coordinates of the points in the convex hull.
+    """
     
     if segment == [] or p1 is None or p2 is None:
     
@@ -86,6 +123,14 @@ def upper_lower_hull(p1, p2, segment, flag):
 
 # Main function to compute the convex hull using the Quickhull algorithm
 def quickhull(points):
+    """Main function to compute the convex hull using the Quickhull algorithm.
+
+    Args:
+        points (list): A list of tuples representing the (x, y) coordinates of the points.
+
+    Returns:
+        convex_hull (list): A list of tuples representing the (x, y) coordinates of the points in the convex hull.
+    """
     
     if len(points) <= 2:
     

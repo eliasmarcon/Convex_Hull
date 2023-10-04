@@ -8,7 +8,17 @@ time_sleeping = 1.0
 
 # Function to initialize the plot with convex hull points
 def initial_plot_updated(ax, canvas, convex_hull):
-    
+    """
+    Function to initialize the plot with convex hull points
+
+    Args:
+        ax: point object
+        canvas: canvas object / where the plot is drawn
+        convex_hull: convex hull points
+    Returns:
+        ax: point object (scatter plot of convex hull points)
+        canvas: canvas object / where the plot is drawn
+    """
     time.sleep(time_sleeping)
     
     # Draw Convex Hull points in red
@@ -23,6 +33,18 @@ def initial_plot_updated(ax, canvas, convex_hull):
 
 # Function to update the plot internally when computing the convex hull
 def update_plot_internally(ax, p1, p2, farthest_point, canvas):
+    """Function to update the plot internally when computing the convex hull
+
+    Args:
+        ax: point object
+        p1: first point
+        p2: second point
+        farthest_point: farthest point
+        canvas: canvas object / where the plot is drawn
+    Returns:
+        ax: point object (scatter plot of current hull points)
+        canvas: canvas object / where the plot is drawn
+    """
     
     time.sleep(time_sleeping)
     
@@ -39,6 +61,13 @@ def update_plot_internally(ax, p1, p2, farthest_point, canvas):
 
 # Function to create the final plot of the convex hull
 def final_plot(ax, convex_hull, canvas):
+    """Function to create the final plot of the convex hull
+    
+    Args:
+        ax: point object
+        convex_hull: convex hull points
+        canvas: canvas object / where the plot is drawn
+    """
     
     time.sleep(time_sleeping)
     
@@ -68,7 +97,15 @@ def final_plot(ax, convex_hull, canvas):
 
 # Function to find the distance between a point and a line defined by two points
 def find_distance(p1, p2, p3):
-    
+    """Function to find the distance between a point and a line defined by two points
+
+    Args:
+        p1: first point of the line
+        p2: second point of the line
+        p3: third point
+    Returns:
+        Distance between a line and a point
+    """
     # Using the formula ax + by + c = 0
     a = p1[1] - p2[1]
     b = p2[0] - p1[0]
@@ -79,7 +116,16 @@ def find_distance(p1, p2, p3):
 
 # Function to create segments above and below a line defined by two points
 def create_segment(p1, p2, v):
-    
+    """Function to create segments above and below a line defined by two points
+
+    Args:
+        p1: first point of the line
+        p2: second point of the line
+        v: list of points
+    Returns:
+        above: list of points above the line
+        below: list of points below the line
+    """
     above = []
     below = []
 
@@ -109,7 +155,21 @@ def create_segment(p1, p2, v):
 
 # Recursive function to compute the upper or lower hull
 def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
-    
+    """
+    Recursive function to compute the upper or lower hull
+
+    Args:
+        ax: point object
+        p1: first point of the line
+        p2: second point of the line
+        segment: list of points
+        flag: "above" or "below"
+        canvas: canvas object / where the plot is drawn
+        root: root object (Tkinter main window)
+
+    Returns:
+        convex_hull: convex hull points
+    """
     if segment == [] or p1 is None or p2 is None:
 
         return []
@@ -158,7 +218,17 @@ def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
 
 # Main function to compute the convex hull using the Quickhull algorithm
 def quickhull(ax, canvas, root, points, current_value):
+    """Main function to compute the convex hull using the Quickhull algorithm.
 
+    Args:
+        ax: point object
+        canvas: canvas object / where the plot is drawn
+        root: root object (Tkinter main window)
+        points: list of points
+        current_value: current value of the slider
+    Returns:
+        convex_hull: convex hull points
+    """
     global time_sleeping
     time_sleeping = current_value
 

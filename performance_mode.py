@@ -21,7 +21,7 @@ quickhull_time = initial_time
 
 # Function to add random points
 def add_random_points():
-    
+    """Function to add random points"""
     num_points_str = num_points_entry.get()
     modules.check_input(num_points_str)  # Validate input
     num_points = int(num_points_str)
@@ -33,30 +33,30 @@ def add_random_points():
 
 # Function to add random points on pressing Enter
 def add_random_points_on_enter(event):
-    
+    """Function to add random points on pressing Enter"""
     add_random_points()
 
 # Function to clear all points
 def clear_points():
-    
+    """Function to clear all points"""
     global points
     points = []  # Clear the list of points
     display_point_count()  # Reset the point count label
 
 # Function to display the current number of points
 def display_point_count():
-    
+    """Function to display the current number of points"""
     point_count_label.config(text=f"Number of Points: {len(points):,.0f}")
 
 # Function to run both algorithms
 def run_both_commands():
-    
+    """Function to run both algorithms"""
     quickhull_run()  # Call the Quickhull algorithm
     giftwrapping_run()  # Call the Giftwrapping algorithm
 
 # Function to update the label showing the faster algorithm
 def update_faster_algorithm_label():
-
+    """Function to update the label showing the faster algorithm"""
     global giftwrapping_time, quickhull_time
     
     if giftwrapping_time < quickhull_time:
@@ -73,7 +73,11 @@ def update_faster_algorithm_label():
 
 # Function to center the main window
 def center_window(root):
+    """Function to center the main window
     
+    Args:
+        root: Tkinter root
+    """
     window_width = 1000 #int(root.winfo_screenwidth() * 0.5) 
     window_height = 850 #int(root.winfo_screenheight() * 0.7)
 
@@ -92,7 +96,7 @@ def center_window(root):
 
 # Function to handle file selection and reading
 def open_file():
-
+    """Function to handle file selection and reading"""
     file_path = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
     
     if file_path:
@@ -124,6 +128,7 @@ def open_file():
 ##########################################################################################################################
 # Giftwrapping Algorithm
 def giftwrapping_run():
+    """Function to run the Giftwrapping algorithm"""
     
     global giftwrapping_time
 
@@ -149,7 +154,7 @@ def giftwrapping_run():
 ##########################################################################################################################
 # Quickhull
 def quickhull_run():
-
+    """Function to run the Quickhull algorithm"""
     global quickhull_time
 
     start_time = time.time()
