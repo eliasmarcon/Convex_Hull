@@ -3,13 +3,30 @@ import numpy as np
 # Function to check if we have a counter-clockwise turn
 # This function checks if three points (p1, p2, p3) make a counter-clockwise turn.
 def is_counter_clockwise(p1, p2, p3):
+    """This function checks if three points (p1, p2, p3) make a counter-clockwise turn.
+
+    Args:
+        p1: point 1
+        p2: point 2
+        p3: point 3
+
+    Returns:
+        bool: True if the points make a counter-clockwise turn, False otherwise
+    """
 
     # Calculate the cross product of vectors (p3-p1) and (p2-p1)
     return (p3[1] - p1[1]) * (p2[0] - p1[0]) >= (p2[1] - p1[1]) * (p3[0] - p1[0])
 
 # Main function:
-# This function calculates the convex hull of a set of points using the gift wrapping algorithm.
+# This function calculates the convex hull of a set of points using the gift wrapping 
+# algorithm.
 def gift_wrapping_calculation(points):
+    """This function calculates the convex hull of a set of points using the gift wrapping
+      algorithm.
+
+    Args:
+        points: list of points
+    """
     
     index = 0
     num_points = len(points)
@@ -70,6 +87,12 @@ def gift_wrapping_calculation(points):
 # Wrapper function for gift wrapping algorithm
 # This function wraps the calculation function and returns the computed convex hull points.
 def gift_wrapping(points):
+    """This function wraps the calculation function and returns the computed convex 
+    hull points.
+
+    Args:
+        points: list of points
+    """
 
     convex_hull_points = gift_wrapping_calculation(points)
 
