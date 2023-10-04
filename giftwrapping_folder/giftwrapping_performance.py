@@ -1,6 +1,5 @@
 import numpy as np
 
-# Function to check if we have a counter-clockwise turn
 # This function checks if three points (p1, p2, p3) make a counter-clockwise turn.
 def is_counter_clockwise(p1, p2, p3):
     """This function checks if three points (p1, p2, p3) make a counter-clockwise turn.

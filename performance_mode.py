@@ -84,9 +84,6 @@ def center_window(root):
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
 
-    # print(screen_width, screen_height)
-    # print(window_width, window_height)
-
     x = ( screen_width / 2 ) - ( window_width / 2 )
     y = ( screen_height / 2 ) - ( window_height / 2 )
 
@@ -349,5 +346,5 @@ tree_giftwrapping.configure(yscroll=scrollbar.set)
 tree_giftwrapping.pack(side="left", expand=True, fill="both", pady=20, padx=10)
 
 
-# Run the Tkinter main loop for the performance optimized mode
+# Run the Tkinter main loop
 root.mainloop()
