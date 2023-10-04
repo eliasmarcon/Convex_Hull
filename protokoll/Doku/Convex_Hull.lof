@@ -1,0 +1,4 @@
+\babel@toc {german}{}\relax 
+\contentsline {figure}{\numberline {\small 1\normalsize }{\ignorespaces QuickHUll: Vergleich von Messwerten (oberer Graph) mit $\mathcal {O}(n* log(n))$}}{3}{figure.caption.6}%
+\contentsline {figure}{\numberline {\small 2\normalsize }{\ignorespaces Giftwrapping: Vergleich von Messwerten bei verschiedenen Testfällen des Giftwrapping Algorithmus. Der obere Graph zeigt die tatsächliche Laufzeit des Algorithmus mit $\sim \mathcal {O}(n)$. Im unteren Graph ist die theoretische Laufzeit von $\mathcal {O}(n*h)$ abgebildet.}}{5}{figure.caption.11}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

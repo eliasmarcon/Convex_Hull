@@ -319,6 +319,11 @@ INPUT C:\Program Files\MiKTeX\tex\latex\listings\listings.cfg
 INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\koma-script\listings.hak
 INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\koma-script\listings.hak
 INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\koma-script\listings.hak
+INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\koma-script\float.hak
+INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\koma-script\float.hak
+INPUT C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex\latex\koma-script\float.hak
 INPUT .\Convex_Hull.aux
 INPUT .\Convex_Hull.aux
 INPUT Convex_Hull.aux
@@ -405,15 +410,38 @@ INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\helvetic\phvr8t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\courier\pcrr8t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\helvetic\phvb8t.tfm
+INPUT .\PICs\QuickHull.png
+INPUT .\PICs\QuickHull.png
+INPUT .\PICs\QuickHull.png
+INPUT .\PICs\QuickHull.png
+INPUT .\PICs\QuickHull.png
+INPUT .\PICs\QuickHull.png
+INPUT .\PICs\QuickHull.png
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\helvetic\phvr8t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\helvetic\phvr8r.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\helvetic\phvb8t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\helvetic\phvb8r.tfm
+INPUT .\PICs\Giftwrapping.png
+INPUT .\PICs\Giftwrapping.png
+INPUT .\PICs\Giftwrapping.png
+INPUT .\PICs\Giftwrapping.png
+INPUT .\PICs\Giftwrapping.png
+INPUT .\PICs\Giftwrapping.png
+INPUT .\PICs\Giftwrapping.png
 INPUT .\Convex_Hull.bbl
 INPUT .\Convex_Hull.bbl
 INPUT Convex_Hull.bbl
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\helvetic\phvro8t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\helvetic\phvro8r.tfm
+OUTPUT Convex_Hull.lof
 INPUT Convex_Hull.aux
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9.24) (preloaded format=pdflatex 2023.9.29)  29 SEP 2023 14:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9.24) (preloaded format=pdflatex 2023.9.29)  4 OCT 2023 20:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -738,40 +738,54 @@ Package scrhack Info: redefining \lstlistoflistings on input line 157.
 Package scrhack Info: patching \lst@MakeCaption on input line 157.
 )
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
- (Convex_Hull.aux)
+ (C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count343
+\float@exts=\toks40
+\float@box=\box71
+\@float@everytoks=\toks41
+\@floatcapt=\box72
+)
+Package scrhack Info: loading float hack on input line 11.
+ (C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\float.hak
+File: float.hak 2023/07/07 v3.41 KOMA-Script scrhack part (hacking package float)
+Package scrhack Info: redefining \newfloat on input line 163.
+Package scrhack Info: redefining \listof on input line 163.
+Package scrhack Info: undefining \float@addtolists on input line 163.
+) (Convex_Hull.aux)
 \openout1 = `Convex_Hull.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
  (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count343
+\scratchcounter=\count344
 \scratchdimen=\dimen283
-\scratchbox=\box71
-\nofMPsegments=\count344
-\nofMParguments=\count345
-\everyMPshowfont=\toks40
-\MPscratchCnt=\count346
+\scratchbox=\box73
+\nofMPsegments=\count345
+\nofMParguments=\count346
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count347
 \MPscratchDim=\dimen284
-\MPnumerator=\count347
-\makeMPintoPDFobject=\count348
-\everyMPtoPDFconversion=\toks41
+\MPnumerator=\count348
+\makeMPintoPDFobject=\count349
+\everyMPtoPDFconversion=\toks43
 ) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -779,28 +793,29 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 45.
-\c@lstlisting=\count349
-Package scrhack Info: undefining \float@addtolists on input line 45.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
+Package hyperref Info: Link coloring ON on input line 46.
+\c@lstlisting=\count350
+Package scrhack Info: undefining \float@addtolists on input line 46.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (18.01724pt too wide) in paragraph at lines 47--47
+Overfull \hbox (18.01724pt too wide) in paragraph at lines 48--48
 []| [] 
  []
 
 <PICs/fhtw_cover.png, id=6, 597.432pt x 845.0772pt>
 File: PICs/fhtw_cover.png Graphic file (type png)
 <use PICs/fhtw_cover.png>
-Package pdftex.def Info: PICs/fhtw_cover.png  used on input line 47.
+Package pdftex.def Info: PICs/fhtw_cover.png  used on input line 48.
 (pdftex.def)             Requested size: 597.55817pt x 845.04933pt.
 [-9
 
@@ -816,53 +831,73 @@ No file Convex_Hull.toc.
 
 ]
 chapter 1.
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 58.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 58.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 59.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 59.
 (C:\Users\fabia\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <10> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 61.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 62.
  [1
 
 ]
 
-LaTeX Warning: Citation `Wikipedia_QuickHull' on page 2 undefined on input line 89.
+LaTeX Warning: Citation `Wikipedia_QuickHull' on page 2 undefined on input line 90.
 
 
-LaTeX Warning: Citation `Wikipedia_QuickHull' on page 2 undefined on input line 89.
+LaTeX Warning: Citation `Wikipedia_QuickHull' on page 2 undefined on input line 90.
 
 
-LaTeX Warning: Citation `10.1145/235815.235821' on page 2 undefined on input line 92.
+LaTeX Warning: Citation `10.1145/235815.235821' on page 2 undefined on input line 93.
 
 
-LaTeX Warning: Citation `10.1145/235815.235821' on page 2 undefined on input line 94.
+LaTeX Warning: Citation `10.1145/235815.235821' on page 2 undefined on input line 96.
 
-
-LaTeX Warning: Citation `JARVIS197318' on page 2 undefined on input line 99.
-
+<./PICs/QuickHull.png, id=51, 714.7503pt x 570.933pt>
+File: ./PICs/QuickHull.png Graphic file (type png)
+<use ./PICs/QuickHull.png>
+Package pdftex.def Info: ./PICs/QuickHull.png  used on input line 101.
+(pdftex.def)             Requested size: 273.7561pt x 218.6817pt.
 [2]
 
-LaTeX Warning: Citation `Wikipedia_GiftWrapping' on page 3 undefined on input line 118.
+LaTeX Warning: Citation `JARVIS197318' on page 3 undefined on input line 110.
+
+[3 <./PICs/QuickHull.png>]
+
+LaTeX Warning: Citation `Wikipedia_GiftWrapping' on page 4 undefined on input line 129.
 
 
-LaTeX Warning: Citation `Wikipedia_GiftWrapping' on page 3 undefined on input line 118.
+LaTeX Warning: Citation `Wikipedia_GiftWrapping' on page 4 undefined on input line 129.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--123
-
- []
-
-[3]
-
-LaTeX Warning: Citation `JARVIS197318' on page 4 undefined on input line 127.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 133--134
 
  []
 
-[4] (Convex_Hull.bbl
+
+LaTeX Warning: Citation `JARVIS197318' on page 4 undefined on input line 139.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+
+ []
+
+[4]
+<./PICs/Giftwrapping.png, id=108, 714.7503pt x 570.933pt>
+File: ./PICs/Giftwrapping.png Graphic file (type png)
+<use ./PICs/Giftwrapping.png>
+Package pdftex.def Info: ./PICs/Giftwrapping.png  used on input line 147.
+(pdftex.def)             Requested size: 273.7561pt x 218.6817pt.
+
+
+LaTeX Warning: Reference `fig:gitwrapping' on page 5 undefined on input line 152.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
+
+ []
+
+[5 <./PICs/Giftwrapping.png>] [6] (Convex_Hull.bbl
 chapter without number
 
 Underfull \hbox (badness 10000) in paragraph at lines 4--7
@@ -871,7 +906,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--7
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 16.
-) [5
+) [7
+
+]
+No file Convex_Hull.lof.
+\tf@lof=\write5
+\openout5 = `Convex_Hull.lof'.
+
+[8
 
 ] (Convex_Hull.aux)
  ***********
@@ -887,17 +929,17 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 31337 strings out of 475248
- 612703 string characters out of 5767628
+ 31466 strings out of 475248
+ 615319 string characters out of 5767628
  2094785 words of memory out of 5000000
- 52277 multiletter control sequences out of 15000+600000
- 598859 words of font info for 85 fonts, out of 8000000 for 9000
+ 52383 multiletter control sequences out of 15000+600000
+ 600558 words of font info for 93 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 122i,20n,121p,11028b,2147s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 122i,21n,121p,11028b,2147s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/courier/ucrro8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on Convex_Hull.pdf (7 pages, 229075 bytes).
+Output written on Convex_Hull.pdf (10 pages, 345778 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
- 68 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 82 named destinations out of 1000 (max. 500000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
