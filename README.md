@@ -1,10 +1,3 @@
-## Todos
-- [ ] Refactoring
-- [x] Commenting
-- [ ] Python Doc
-- [ ] Testfälle erstellen
-  - [ ] Algos beschreiben (best/worst case, aufwandsabschätzung anhand der Testbeispiele), Deckblatt, Struktur inhaltsverzeichnis (Vorlage eines Labs von der FH), Seiten 3-5 (hat er aber offen gelassen), Testmessungen
-
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
@@ -26,13 +19,26 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#convex-hull-algorithms">Convex Hull Algorithms</a></li>
+    <li><a href="#convex-hull-algorithms-repository">Convex Hull Algorithms Repository</a></li>
     <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
+    <li>
+      <a href="#convex-hull-algorithms">Convex Hull Algorithms</a>
+    </li>
+    <li>  
+      <a href="#data-generation">Data Generation</a>
+    </li>
+    <li>  
+      <a href="#modes-of-operation">Modes of Operation</a>
+      <ul>
+        <li><a href="#performance-optimized-mode">Performance-Optimized Mode</a></li>
+        <li><a href="#visual-mode">Visual Mode</a></li>
+      </ul>
+    </li>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -47,7 +53,7 @@
   </ol>
 </details>
 
-# Convex Hull Algorithms
+# Convex Hull Algorithms Repository
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -104,6 +110,11 @@ Two methods of generating input data for the algorithms are considered:
     ```sh
     python generating_file_input.py 300 (Text file with 300 points would be generated)     
     ```
+
+
+## Testprotokoll
+[Testprotokoll](protokoll\Convex_Hull_Algorithms_Gift_wrapping_Quick_Hull.pdf)
+
 
 ## Modes of Operation:
 The project offers two modes of operation to cater to different user needs:

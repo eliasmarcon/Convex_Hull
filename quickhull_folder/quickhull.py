@@ -2,8 +2,6 @@ import time
 import numpy as np
 import math
 
-from IPython.display import clear_output
-
 time_sleeping = 1.0
 
 # Function to initialize the plot with convex hull points

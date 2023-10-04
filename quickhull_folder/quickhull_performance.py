@@ -1,8 +1,6 @@
 import math
 
 # Function to find the distance between a point and a line defined by two points
-import math
-
 def find_distance(p1, p2, p3):
     """
     Calculates the distance between a line defined by two points (p1 and p2) and a third point (p3).

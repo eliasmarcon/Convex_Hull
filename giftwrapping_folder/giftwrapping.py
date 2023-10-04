@@ -1,8 +1,6 @@
 import time
 import numpy as np
 
-from IPython.display import clear_output
-
 time_sleeping = 1.0
 
 # Function to check if we have a counter-clockwise turn
