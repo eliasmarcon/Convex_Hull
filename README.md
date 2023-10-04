@@ -113,7 +113,7 @@ Two methods of generating input data for the algorithms are considered:
 
 
 ## Testprotokoll
-[Testprotokoll](https://github.com/eliasmarcon/Convex_Hull/blob/main/protokoll/Convex_Hull_Algorithms_Gift_wrapping_Quick_Hull.pdf)
+[Testprotokoll](https://github.com/eliasmarcon/Convex_Hull/blob/main/protokoll/Testprotokoll_Quickhull_Giftwrapping.pdf)
 
 
 ## Modes of Operation:
