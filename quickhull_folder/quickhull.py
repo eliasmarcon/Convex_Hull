@@ -268,3 +268,4 @@ def quickhull(ax, canvas, root, points, current_value):
         final_plot(ax, points, canvas)
 
         return points
+

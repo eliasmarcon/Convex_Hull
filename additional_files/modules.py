@@ -307,3 +307,4 @@ def open_csv_file(filepath, algorithm_name, num_points):
 
     # Return the run number for reference
     return run_number
+

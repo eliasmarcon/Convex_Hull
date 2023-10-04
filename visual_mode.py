@@ -240,4 +240,3 @@ canvas.get_tk_widget().pack(side="left", fill="both", expand=True)
 
 # Start the Tkinter main loop
 root.mainloop()
-
