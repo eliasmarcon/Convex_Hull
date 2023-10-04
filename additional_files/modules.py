@@ -46,7 +46,11 @@ def check_input(input):
 
 # Define a function to check if input for points is in the correct format
 def check_input_point(input):
-    
+    """
+    Checks if the input is in the correct format.
+    Args:
+        input: The input to check.
+    """
     if "," not in input:
     
         messagebox.showerror("Error", "Incorrect input, the input has to contain a ',' to separate the x- and y-coordinate")
@@ -68,6 +72,15 @@ def check_input_point(input):
 
 
 def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
+    """
+    Generate a list of random points within the specified ranges.
+    
+    args:
+        num_points: number of points to generate
+        points_array: optional array of points to append to
+        x_range: range of x coordinates
+        y_range: range of y coordinates
+    """
     
     # Check if a custom points_array is provided; if not, initialize an empty list
     if points_array is None:
@@ -99,6 +112,12 @@ def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), y_ra
 # Create an empty DataFrame
 # Get the current working directory
 def check_existense(algorithm_name):
+    """
+    Checks if the file exists.
+    
+    args:
+        algorithm_name: name of the algorithm to check if the file exists
+    """
 
     # Get the current working directory
     current_directory = os.getcwd()
@@ -124,6 +143,12 @@ def check_existense(algorithm_name):
     return filepath
 
 def get_last_number(filepath):
+    """
+    Gets the last run number +1 of the file.
+
+    args:
+        filepath: path to the file
+    """
     
     # Open and read the CSV file
     with open(filepath, 'r') as csvfile:
@@ -152,6 +177,12 @@ def get_last_number(filepath):
 
 # Function to check if the csvs are there or not
 def check_csv_exist(filepath):
+    """
+    Checks if the CSV file exists.
+    
+    args:
+        filepath: path to the CSV file
+    """
 
     if os.path.isfile(filepath):
 
@@ -179,6 +210,9 @@ def check_csv_exist(filepath):
 
 
 def get_preset_points_array():
+    """
+    Returns an array of preset numbers of points to test.
+    """
 
     num_points_array = [
 
@@ -215,6 +249,14 @@ def get_preset_points_array():
 
 
 def open_csv_file(filepath, algorithm_name, num_points):
+    """
+    Opens the CSV file and writes the test results to it.
+    
+    args:
+        filepath: path to the CSV file
+        algorithm_name: name of the algorithm to check if the file exists
+        num_points: number of points to generate
+    """
 
     # Get the last run number from the existing CSV file
     run_number = get_last_number(filepath)
