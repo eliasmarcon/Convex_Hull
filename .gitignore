@@ -3,3 +3,4 @@
 
 # # ignore whole text files
 # test_text_files/
+*.pyc
