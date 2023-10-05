@@ -1,20 +1,5 @@
 import numpy as np
-
-# This function checks if three points (p1, p2, p3) make a counter-clockwise turn.
-def is_counter_clockwise(p1, p2, p3):
-    """This function checks if three points (p1, p2, p3) make a counter-clockwise turn.
-
-    Args:
-        p1: point 1
-        p2: point 2
-        p3: point 3
-
-    Returns:
-        bool: True if the points make a counter-clockwise turn, False otherwise
-    """
-
-    # Calculate the cross product of vectors (p3-p1) and (p2-p1)
-    return (p3[1] - p1[1]) * (p2[0] - p1[0]) >= (p2[1] - p1[1]) * (p3[0] - p1[0])
+import additional_files.modules_giftwrapping as modules_giftwrapping
 
 # Main function:
 # This function calculates the convex hull of a set of points using the gift wrapping 
@@ -27,7 +12,6 @@ def gift_wrapping_calculation(points):
         points: list of points
     """
     
-    index = 0
     num_points = len(points)
     
     # Convert the list of points to a NumPy array for efficient manipulation
@@ -52,18 +36,13 @@ def gift_wrapping_calculation(points):
         for j in range(1, num_points):
     
             # Check if the current point is the same as the current hull point or if it is not counter-clockwise
-            if (next_endpoint[0] == current_hull_point[0] and next_endpoint[1] == current_hull_point[1]) or not is_counter_clockwise(points[j], convex_hull_points[i], next_endpoint):
+            if (next_endpoint[0] == current_hull_point[0] and next_endpoint[1] == current_hull_point[1]) or not modules_giftwrapping.is_counter_clockwise(points[j], convex_hull_points[i], next_endpoint):
     
                 next_endpoint = points[j]
         
         # Move to the next position in the convex hull
         i += 1
         current_hull_point = next_endpoint
-        
-        # Create a current hull containing all non-empty points
-        current_hull = np.array([convex_hull_points[k] for k in range(num_points) if convex_hull_points[k] is not None])
-        
-        index += 1
         
         # Check if we have completed the convex hull by returning to the starting point
         if next_endpoint[0] == convex_hull_points[0][0] and next_endpoint[1] == convex_hull_points[0][1]:

@@ -1,6 +1,7 @@
 import time
 import numpy as np
-import math
+
+import additional_files.modules_quickhull as modules_quickhull
 
 time_sleeping = 1.0
 
@@ -93,63 +94,6 @@ def final_plot(ax, convex_hull, canvas):
     
     canvas.draw()
 
-# Function to find the distance between a point and a line defined by two points
-def find_distance(p1, p2, p3):
-    """Function to find the distance between a point and a line defined by two points
-
-    Args:
-        p1: first point of the line
-        p2: second point of the line
-        p3: third point
-    Returns:
-        Distance between a line and a point
-    """
-    # Using the formula ax + by + c = 0
-    a = p1[1] - p2[1]
-    b = p2[0] - p1[0]
-    c = p1[0] * p2[1] - p2[0] * p1[1]
-    
-    # Use dot product to find the distance between a line and a point
-    return abs(a * p3[0] + b * p3[1] + c) / math.sqrt(a * a + b * b)
-
-# Function to create segments above and below a line defined by two points
-def create_segment(p1, p2, v):
-    """Function to create segments above and below a line defined by two points
-
-    Args:
-        p1: first point of the line
-        p2: second point of the line
-        v: list of points
-    Returns:
-        above: list of points above the line
-        below: list of points below the line
-    """
-    above = []
-    below = []
-
-    if p2[0] - p1[0] == 0:
-    
-        return above, below
-
-    # Calculate m and c for y = mx + c
-    m = (p2[1] - p1[1]) / (p2[0] - p1[0])
-    c = -m * p1[0] + p1[1]
-
-    # Loop through each coordinate and place it into the correct list (above or below the line)
-    for coordinate in v:
-    
-        # y > mx + c means it is above the line
-    
-        if coordinate[1] > m * coordinate[0] + c:
-    
-            above.append(coordinate)
-    
-        # y < mx + c means it is below the line
-        elif coordinate[1] < m * coordinate[0] + c:
-    
-            below.append(coordinate)
-
-    return above, below
 
 # Recursive function to compute the upper or lower hull
 def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
@@ -180,7 +124,7 @@ def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
 
     for point in segment:
 
-        distance = find_distance(p1, p2, point)
+        distance = modules_quickhull.find_distance(p1, p2, point)
 
         if distance > farthest_distance:
 
@@ -198,8 +142,8 @@ def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
     segment.remove(farthest_point)
 
     # Determine the segments formed from two lines: p1-farthest_point and p2-farthest_point
-    point1above, point1below = create_segment(p1, farthest_point, segment)
-    point2above, point2below = create_segment(p2, farthest_point, segment)
+    point1above, point1below = modules_quickhull.create_segment(p1, farthest_point, segment)
+    point2above, point2below = modules_quickhull.create_segment(p2, farthest_point, segment)
 
     # Only use the segments in the same direction; the opposite direction is contained in the convex hull
     if flag == "above":
@@ -237,9 +181,18 @@ def quickhull(ax, canvas, root, points, current_value):
     if len(points) > 2:
 
         convex_hull = []
-        sort = sorted(points, key=lambda x: x[0])
-        p1 = sort[0]
-        p2 = sort[-1]
+
+        # sort = sorted(points, key=lambda x: x[0])
+        # p1 = sort[0]
+        # p2 = sort[-1]
+
+        p1 = min(points, key=lambda point: point[0])
+        p2 = max(points, key=lambda point: point[0])
+
+        # Remove the leftmost and rightmost points from the array
+        points.remove(p1)
+        points.remove(p2)
+
         convex_hull = convex_hull + [p1, p2]
 
         if len(points) == 2:
@@ -248,13 +201,13 @@ def quickhull(ax, canvas, root, points, current_value):
 
             return ax, points
 
-        sort.pop(0)
-        sort.pop(-1)
+        # sort.pop(0)
+        # sort.pop(-1)
 
         ax, canvas = initial_plot_updated(ax, canvas, convex_hull)
         root.update()  # Update the GUI
 
-        above, below = create_segment(p1, p2, sort)
+        above, below = modules_quickhull.create_segment(p1, p2, points)
 
         convex_hull = convex_hull + upper_lower_hull(ax, p1, p2, above, "above", canvas, root)
         convex_hull = convex_hull + upper_lower_hull(ax, p1, p2, below, "below", canvas, root)
@@ -262,6 +215,7 @@ def quickhull(ax, canvas, root, points, current_value):
         final_plot(ax, convex_hull, canvas)
 
         return convex_hull
+    
 
     else:
 

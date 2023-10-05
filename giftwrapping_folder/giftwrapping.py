@@ -1,22 +1,9 @@
 import time
 import numpy as np
+import additional_files.modules_giftwrapping as modules_giftwrapping
 
 time_sleeping = 1.0
 
-# Function to check if we have a counter-clockwise turn
-def is_counter_clockwise(p1, p2, p3):
-    """This function checks if three points (p1, p2, p3) make a counter-clockwise turn.
-
-    Args:
-        p1: point 1
-        p2: point 2
-        p3: point 3
-
-    Returns:
-        bool: True if the points make a counter-clockwise turn, False otherwise
-    """
-    
-    return (p3[1] - p1[1]) * (p2[0] - p1[0]) >= (p2[1] - p1[1]) * (p3[0] - p1[0])
 
 # Function to update the plot by highlighting current hull points
 def update_plot(ax, canvas, current_hull):
@@ -98,7 +85,6 @@ def gift_wrapping_calculation(ax, canvas, root, points):
 
     """
     
-    index = 0
     num_points = len(points)
     points = np.array(points)
     convex_hull_points = [None] * num_points
@@ -113,7 +99,7 @@ def gift_wrapping_calculation(ax, canvas, root, points):
     
         for j in range(1, num_points):
     
-            if (next_endpoint[0] == current_hull_point[0] and next_endpoint[1] == current_hull_point[1]) or not is_counter_clockwise(points[j], convex_hull_points[i], next_endpoint):
+            if (next_endpoint[0] == current_hull_point[0] and next_endpoint[1] == current_hull_point[1]) or not modules_giftwrapping.is_counter_clockwise(points[j], convex_hull_points[i], next_endpoint):
     
                 next_endpoint = points[j]
     
@@ -124,8 +110,6 @@ def gift_wrapping_calculation(ax, canvas, root, points):
         
         ax, canvas = update_plot(ax, canvas, current_hull)
         root.update()  # Update the GUI
-        
-        index += 1
         
         if next_endpoint[0] == convex_hull_points[0][0] and next_endpoint[1] == convex_hull_points[0][1]:
         
