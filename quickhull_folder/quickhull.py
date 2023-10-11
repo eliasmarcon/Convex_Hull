@@ -142,19 +142,19 @@ def upper_lower_hull(ax, p1, p2, segment, flag, canvas, root):
     segment.remove(farthest_point)
 
     # Determine the segments formed from two lines: p1-farthest_point and p2-farthest_point
-    point1above, point1below = modules_quickhull.create_segment(p1, farthest_point, segment)
-    point2above, point2below = modules_quickhull.create_segment(p2, farthest_point, segment)
+    point_1_above, point_1_below = modules_quickhull.create_segment(p1, farthest_point, segment)
+    point_2_above, point_2_below = modules_quickhull.create_segment(p2, farthest_point, segment)
 
     # Only use the segments in the same direction; the opposite direction is contained in the convex hull
     if flag == "above":
 
-        convex_hull = convex_hull + upper_lower_hull(ax, p1, farthest_point, point1above, "above", canvas, root)
-        convex_hull = convex_hull + upper_lower_hull(ax, farthest_point, p2, point2above, "above", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, p1, farthest_point, point_1_above, "above", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, farthest_point, p2, point_2_above, "above", canvas, root)
 
     else:
 
-        convex_hull = convex_hull + upper_lower_hull(ax, p1, farthest_point, point1below, "below", canvas, root)
-        convex_hull = convex_hull + upper_lower_hull(ax, farthest_point, p2, point2below, "below", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, p1, farthest_point, point_1_below, "below", canvas, root)
+        convex_hull = convex_hull + upper_lower_hull(ax, farthest_point, p2, point_2_below, "below", canvas, root)
 
     return convex_hull
 
@@ -182,10 +182,6 @@ def quickhull(ax, canvas, root, points, current_value):
 
         convex_hull = []
 
-        # sort = sorted(points, key=lambda x: x[0])
-        # p1 = sort[0]
-        # p2 = sort[-1]
-
         p1 = min(points, key=lambda point: point[0])
         p2 = max(points, key=lambda point: point[0])
 
@@ -200,9 +196,6 @@ def quickhull(ax, canvas, root, points, current_value):
             ax, canvas = initial_plot_updated(ax, canvas, convex_hull)
 
             return ax, points
-
-        # sort.pop(0)
-        # sort.pop(-1)
 
         ax, canvas = initial_plot_updated(ax, canvas, convex_hull)
         root.update()  # Update the GUI
