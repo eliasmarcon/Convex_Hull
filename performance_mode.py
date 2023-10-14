@@ -1,7 +1,5 @@
 import tkinter as tk
 import time
-import pandas as pd
-import os
 
 from quickhull_folder.quickhull_performance import *
 from giftwrapping_folder.giftwrapping_performance import *
@@ -105,8 +103,6 @@ def open_file():
             if len(lines) >= 2:
 
                 try:
-                    # Read the number of points from the first line
-                    num_points = int(lines[0])
                     
                     # Parse the following lines with x,y coordinates
                     for line in lines[1:]:
@@ -142,6 +138,8 @@ def giftwrapping_run():
 
     # Update the elapsed time label
     dac_elapsed_time_label.config(text=f"Elapsed Time Giftwrapping Algorithm: {giftwrapping_time:.4f} seconds")
+
+    modules.update_csv_file("Giftwrapping", len(points) + 2, giftwrapping_time)
     
     # Determine the faster algorithm and update the label
     update_faster_algorithm_label()
@@ -164,6 +162,8 @@ def quickhull_run():
 
     # Update the elapsed time label
     elapsed_time_label.config(text=f"Elapsed Time Quickhull Algorithm: {quickhull_time:.4f} seconds")
+
+    modules.update_csv_file("Quickhull", len(points) + 2, quickhull_time)
 
     # Determine the faster algorithm and update the label
     update_faster_algorithm_label()
@@ -202,7 +202,7 @@ ttk.Button(upper_frame, text="Clear Points", command=clear_points).grid(row=0, c
 # Create a button to trigger file upload
 upload_button = ttk.Button(upper_frame, text="Upload File", command=open_file)
 upload_button.grid(row=1, column=1, padx=(100, 100), pady=10, sticky="NSEW")
-ttk.Button(upper_frame, text="Compare both Algorithms", command=run_both_commands).grid(row=2, column=1, padx=(100, 100), pady=10, sticky="NSEW")
+ttk.Button(upper_frame, text="Compare both Algorithms", command=run_both_commands).grid(row=2, column=1, padx=(100, 100), pady=10, sticky="NSEW") #command=lambda : (run_both_commands(), update_treeview_quickhull(), update_treeview_giftwrapping())
 
 ###################################################################################################################################
 
@@ -284,18 +284,60 @@ df_quickhull = modules.check_csv_exist(filepath_quickhull)
 lower_frame_tree1 = tk.Frame(root)
 lower_frame_tree1.pack(fill = "both", expand = True) 
 
-
 # Create a Treeview widget to display the DataFrame
 tree_quickhull = ttk.Treeview(lower_frame_tree1, columns=list(df_quickhull.columns), show='headings')
 
 # Add column headings
 for col in df_quickhull.columns:
-    tree_quickhull.heading(col, text=col)
+    
+    if "Execution Time" in col:
+
+        col_text = "Execution Time in Seconds"
+        tree_quickhull.heading(col, text=col_text)
+
+    else:
+
+        tree_quickhull.heading(col, text=col)
+
     tree_quickhull.column(col)
 
 # Insert DataFrame rows into the Treeview
 for i, row in df_quickhull.iterrows():
-    tree_quickhull.insert('', 'end', values=row.tolist())
+    numeric_columns = ['Test_Case', 'Number_of_Points']
+    formatted_row = [int(value) if col in numeric_columns else value for col, value in row.items()]
+    tree_quickhull.insert('', 'end', values=formatted_row)
+
+# def update_treeview_quickhull():
+
+#     filepath_quickhull = r'test_csv_files\Testfile_Quickhull.csv'
+#     df_quickhull = modules.check_csv_exist(filepath_quickhull)
+
+#     lower_frame_tree1 = tk.Frame(root)
+#     lower_frame_tree1.pack(fill = "both", expand = True) 
+
+#     # Create a Treeview widget to display the DataFrame
+#     tree_quickhull = ttk.Treeview(lower_frame_tree1, columns=list(df_quickhull.columns), show='headings')
+
+#     # Add column headings
+#     for col in df_quickhull.columns:
+        
+#         if "Execution Time" in col:
+
+#             col_text = "Execution Time in Seconds"
+#             tree_quickhull.heading(col, text=col_text)
+
+#         else:
+
+#             tree_quickhull.heading(col, text=col)
+
+#         tree_quickhull.column(col)
+
+#     # Insert DataFrame rows into the Treeview
+#     for i, row in df_quickhull.iterrows():
+#         numeric_columns = ['Test_Case', 'Number_of_Points']
+#         formatted_row = [int(value) if col in numeric_columns else value for col, value in row.items()]
+#         tree_quickhull.insert('', 'end', values=formatted_row)
+
 
 # Create a scrollbar
 scrollbar = ttk.Scrollbar(lower_frame_tree1, orient='vertical', command=tree_quickhull.yview)
@@ -331,13 +373,23 @@ tree_giftwrapping = ttk.Treeview(lower_frame2_tree2, columns=list(df_giftwrappin
 # Add column headings
 for col in df_giftwrapping.columns:
 
-    tree_giftwrapping.heading(col, text=col)
+    if "Execution Time" in col:
+        
+        col_text = "Execution Time in Seconds"
+        tree_giftwrapping.heading(col, text=col_text)
+
+    else:
+
+        tree_giftwrapping.heading(col, text=col)
+
     tree_giftwrapping.column(col)
 
 # Insert DataFrame rows into the Treeview
 for i, row in df_giftwrapping.iterrows():
-    
-    tree_giftwrapping.insert('', 'end', values=row.tolist())
+    numeric_columns = ['Test_Case', 'Number_of_Points']
+    formatted_row = [int(value) if col in numeric_columns else value for col, value in row.items()]
+    tree_giftwrapping.insert('', 'end', values=formatted_row)
+
 
 # Create a scrollbar
 scrollbar = ttk.Scrollbar(lower_frame2_tree2, orient='vertical', command=tree_giftwrapping.yview)

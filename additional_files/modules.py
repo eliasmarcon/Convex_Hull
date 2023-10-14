@@ -71,7 +71,7 @@ def check_input_point(input):
 
 
 
-def generate_points(num_points, points_array=None, x_range=(-500.0, 500.0), y_range=(-500.0, 500.0)):
+def generate_points(num_points, points_array=None):
     """
     Generate a list of random points within the specified ranges.
     
@@ -124,9 +124,15 @@ def check_existense(algorithm_name):
 
     # Navigate to the parent directory (move one folder back)
     parent_directory = os.path.dirname(current_directory)
-
+    
     # Create the file path by joining parent_directory, "test_csv_files," and a file name based on algorithm_name
-    filepath = os.path.join(parent_directory, "test_csv_files", f"Testfile_{algorithm_name}.csv")
+    if "Convex_Hull" in parent_directory:
+
+        filepath = os.path.join(parent_directory, "test_csv_files", f"Testfile_{algorithm_name}.csv")
+    
+    else:
+
+        filepath = os.path.join(parent_directory, "Convex_Hull", "test_csv_files", f"Testfile_{algorithm_name}.csv")
 
     # Check if the file exists
     if os.path.exists(filepath):
@@ -199,10 +205,6 @@ def check_csv_exist(filepath):
     
     else:
 
-        # strings = filepath.split("\\")
-        # filename = strings[-1].split(".")[0]
-        # messagebox.showerror("Error", f"Please create the File {filename}")
-
         # Create an empty DataFrame with specified column names
         df = pd.DataFrame(columns=["Test_Case", "Number_of_Points", "Execution Time"])
         # Save the DataFrame as a CSV file at the specified filepath
@@ -246,6 +248,32 @@ def get_preset_points_array():
                     ]
     
     return num_points_array
+
+
+
+def update_csv_file(algorithm_name, num_points, time_taken):
+
+    # Check for the existence of a CSV file and create it if it doesn't exist
+    filepath = check_existense(algorithm_name)
+
+    # Get the last run number from the existing CSV file
+    run_number = get_last_number(filepath)
+
+    # Create and open a CSV file for logging (appending mode) and specify newline handling
+    with open(filepath, 'a', newline='') as csvfile:
+    
+        # Define the fieldnames for the CSV file
+        fieldnames = ["Test_Case", "Number_of_Points", "Execution Time"]
+
+        # Create a CSV DictWriter object with the specified fieldnames
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        # Write a row with execution results to the CSV file
+        writer.writerow({'Test_Case': run_number, 'Number_of_Points': num_points,
+                         'Execution Time': f"{time_taken:.4f}"})
+
+    # Manually close the CSV file
+    csvfile.close()
 
 
 def open_csv_file(filepath, algorithm_name, num_points):
