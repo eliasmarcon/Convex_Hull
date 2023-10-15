@@ -60,7 +60,7 @@
 
 The project aims to implement and visualize two different convex hull algorithms for 2D data: Quickhull and Giftwrapping. The primary objective is to compare the performance of these algorithms in terms of execution time and to provide interactive visualizations of the step-by-step convex hull construction. Here is a full example of the application and its usecases:
 
-
+videos/Main_Video.mp4
 
 ## Convex Hull Algorithms:
 The project focuses on two well-known convex hull algorithms:
@@ -112,10 +112,6 @@ Two methods of generating input data for the algorithms are considered:
     ```sh
     python generating_file_input.py 300 (Text file with 300 points would be generated)     
     ```
-
-
-## Testprotokoll
-[Testprotokoll](https://github.com/eliasmarcon/Convex_Hull/blob/main/protokoll/Testprotokoll_Quickhull_Giftwrapping.pdf)
 
 
 ## Modes of Operation:
@@ -186,9 +182,6 @@ If you want to run the code locally, proceed with the following steps:
 ## Contact
 
 * https://github.com/eliasmarcon
-* https://github.com/fasteiner
-* https://github.com/hannah039
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
