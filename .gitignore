@@ -1,9 +1,3 @@
-# # ignore whole test csv files
-# test_csv_files/
-
-# # ignore whole text files
-# test_text_files/
-
-__pychae__/
+__pychae__
 .pyc
 .ipynb
