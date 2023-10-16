@@ -72,7 +72,8 @@ The project focuses on two well-known convex hull algorithms:
 
 * Giftwrapping (also known as Jarvis March): An iterative algorithm that constructs the convex hull by choosing points in a counter-clockwise manner. Example of the Algorithm:
 
-[Gifwrapping Introduction](https://github.com/eliasmarcon/Convex_Hull/assets/98773135/9f0eecef-16b2-436e-80de-b003796e2c5a)
+[Gifwrapping Introduction](https://github.com/eliasmarcon/Convex_Hull/assets/98773135/14307468-9788-4141-97c0-9b91f0558b3a)
+
 
 
 ## Data Generation:
